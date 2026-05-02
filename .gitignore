@@ -1,0 +1,29 @@
+# --- Environment & Keys ---
+.env
+taxoflow_venv/
+__pycache__/
+*.py[cod]
+
+# --- Data & Junk ---
+data/
+.DS_Store
+Untitled*       
+node_modules/
+venv_urbanpulse/
+.env
+node_modules/
+__pycache__/
+*.pyc
+.next/
+
+# --- IDE & Tooling ---
+.vscode/
+.idea/
+.cursor/
+
+__pycache__/
+*.pyc
+
+# --- Test files ---
+test_agent.py
+generate_manifest.py
