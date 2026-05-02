@@ -3,7 +3,8 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException
 
 from ..services.file_service import get_session
-from ..services.analysis_service import run_pipeline_sync, apply_filters
+from ..services.analysis_service import run_pipeline_sync
+from ..services.filter_service import apply_filters
 from ..schemas.request_models import RunAnalysisRequest, FilterPreviewRequest
 from ..schemas.response_models import AnalysisStatus, FilterPreviewResponse
 

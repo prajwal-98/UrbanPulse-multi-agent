@@ -1,5 +1,9 @@
 import pandas as pd
 from core.schema import UrbanPulseState
+from agents.A8_insight_builders import (
+    build_metrics, build_story, build_confidence, build_impact,
+    build_root_cause, build_actions, build_evidence, build_language_highlights,
+)
 
 
 def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
@@ -33,97 +37,23 @@ def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
         size = top_cluster.get("size", 0)
 
         # -------------------------------
-        # 2. BASIC METRICS
-        # -------------------------------
-        total_reviews = len(df)
-
-        negative_count = df["raw_text"].str.contains(
-            "late|delay|bad|missing|slow|rude", case=False, regex=True
-        ).sum()
-
-        negative_pct = round((negative_count / total_reviews) * 100, 1) if total_reviews else 0
-
-        top_brand = None
-        if "brand" in df.columns:
-            top_brand = df["brand"].value_counts().idxmax()
-
-        # -------------------------------
         # 3. TIME CONTEXT
         # -------------------------------
         peak_time = a6.get("time", {}).get("label", "peak hours")
 
         # -------------------------------
-        # 4. DYNAMIC STORY
+        # BUILDER CALLS
         # -------------------------------
-        city = df["city"].mode()[0] if "city" in df.columns else "selected region"
-        category = df["category"].mode()[0] if "category" in df.columns else "key categories"
-
-        story = f"During {peak_time} in {city}, {issue.lower()} are impacting {category.lower()} products."
-
-        # -------------------------------
-        # 5. AI CONFIDENCE
-        # -------------------------------
-        confidence = min(95, max(60, int((size / total_reviews) * 100)))
-
-        drivers = [
-            f"{negative_pct}% negative sentiment",
-            f"{issue} is dominant pattern",
-            f"Peak load during {peak_time}"
-        ]
-
-        # -------------------------------
-        # 6. IMPACT
-        # -------------------------------
-        impact = {
-            "revenue_risk": f"₹{size * 150}K approx",
-            "affected_reviews": size,
-            "churn_risk_percent": min(50, int(negative_pct * 0.6))
-        }
-
-        # -------------------------------
-        # 7. ROOT CAUSE
-        # -------------------------------
-        root_cause = f"High demand during {peak_time} combined with operational inefficiencies is driving {issue.lower()}."
-
-        # -------------------------------
-        # 8. ACTIONS (FROM A5)
-        # -------------------------------
-        actions = []
-
-        for item in a5[:3]:
-            actions.append({
-                "title": f"{item.get('issue_category')} Fix",
-                "description": item.get("reason"),
-                "priority": item.get("priority")
-            })
-
-        # fallback
-        if not actions:
-            actions = [
-                {
-                    "title": "Improve Operations",
-                    "description": "Optimize delivery and inventory handling",
-                    "priority": "High"
-                }
-            ]
-
-        # -------------------------------
-        # 9. EVIDENCE
-        # -------------------------------
-        evidence = df["raw_text"].dropna().head(5).tolist()
-
-        # -------------------------------
-        # 10. LANGUAGE HIGHLIGHTS
-        # -------------------------------
-        slang_data = a7.get("slang_intelligence", [])
-
-        language_highlights = []
-        for s in slang_data[:3]:
-            language_highlights.append({
-                "slang": s.get("slang"),
-                "usage": s.get("total_usage"),
-                "sentiment": max(s.get("sentiment", {}), key=s.get("sentiment", {}).get)
-            })
+        metrics_data = build_metrics(df)
+        story = build_story(issue, peak_time, df)
+        confidence, drivers = build_confidence(
+            size, metrics_data["total_reviews"], metrics_data["negative_pct"], issue, peak_time
+        )
+        impact = build_impact(size, metrics_data["negative_pct"])
+        root_cause = build_root_cause(peak_time, issue)
+        actions = build_actions(a5)
+        evidence = build_evidence(df)
+        language_highlights = build_language_highlights(a7)
 
         # -------------------------------
         # FINAL OUTPUT
@@ -133,17 +63,17 @@ def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
             "confidence": confidence,
             "drivers": drivers,
             "metrics": {
-                "total_reviews": total_reviews,
-                "negative_percent": negative_pct,
+                "total_reviews": metrics_data["total_reviews"],
+                "negative_percent": metrics_data["negative_pct"],
                 "top_issue": issue,
-                "top_brand": top_brand
+                "top_brand": metrics_data["top_brand"],
             },
             "impact": impact,
             "breakdown": a6,
             "root_cause": root_cause,
             "actions": actions,
             "evidence": evidence,
-            "language": language_highlights
+            "language": language_highlights,
         }
 
     except Exception as e:

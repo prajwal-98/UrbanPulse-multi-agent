@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from ..services.file_service import get_session
-from ..services.analysis_service import get_dashboard_data
+from ..services.state_service import get_dashboard_data
 from ..schemas.response_models import DashboardResponse
 
 router = APIRouter(tags=["Dashboard"])
