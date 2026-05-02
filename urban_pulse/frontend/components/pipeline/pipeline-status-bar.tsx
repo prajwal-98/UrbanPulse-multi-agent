@@ -11,11 +11,12 @@ interface StepDotProps {
   isIdle: boolean;
   viewingStep: number;
   visitedSteps: Set<number>;
+  currentStepNum: number;
   onClickStep: (n: number) => void;
 }
 
-function StepDot({ s, isLast, isIdle, viewingStep, visitedSteps, onClickStep }: StepDotProps) {
-  const visited = visitedSteps.has(s.num);
+function StepDot({ s, isLast, isIdle, viewingStep, visitedSteps, currentStepNum, onClickStep }: StepDotProps) {
+  const visited = visitedSteps.has(s.num) || s.num < currentStepNum;
   const viewing = s.num === viewingStep;
   const clickable = !isIdle;
 
@@ -73,6 +74,7 @@ interface PipelineStatusBarProps {
   localProgress: number;
   visitedSteps: Set<number>;
   viewingStep: number;
+  currentStepNum: number;
   onClickStep: (n: number) => void;
 }
 
@@ -83,6 +85,7 @@ export default function PipelineStatusBar({
   localProgress,
   visitedSteps,
   viewingStep,
+  currentStepNum,
   onClickStep,
 }: PipelineStatusBarProps) {
   return (
@@ -99,6 +102,7 @@ export default function PipelineStatusBar({
             isIdle={isIdle}
             viewingStep={viewingStep}
             visitedSteps={visitedSteps}
+            currentStepNum={currentStepNum}
             onClickStep={onClickStep}
           />
         ))}

@@ -18,9 +18,9 @@ export default function Sidebar() {
     session.pipelineStatus === "idle" &&
     (session.mode === "demo" || Boolean(session.apiKey));
 
-  const handleRunAnalysis = async () => {
+  const handleRunAnalysis = () => {
     setCollapsed(true);
-    await session.runAnalysis();
+    session.runAnalysis();
     router.push("/step-1");
   };
 

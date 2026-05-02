@@ -1,0 +1,8 @@
+node_modules/
+*.lock
+dist/
+build/
+data/
+*.csv
+*.parquet
+__pycache__/

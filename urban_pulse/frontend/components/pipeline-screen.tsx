@@ -36,6 +36,7 @@ export default function PipelineScreen() {
   const [reloadKey, setReloadKey]         = useState(0);
 
   const prevIsComplete = useRef(false);
+  const prevIsRunning  = useRef(false);
   const stepDataRef    = useRef<Record<number, any>>({});
   stepDataRef.current  = stepData;
 
@@ -45,8 +46,28 @@ export default function PipelineScreen() {
       setViewingStep(1);
       setVisitedSteps(new Set<number>());
       prevIsComplete.current = false;
+      prevIsRunning.current  = false;
     }
   }, [isIdle]);
+
+  // Jump to A1 the moment the pipeline starts running.
+  useEffect(() => {
+    if (isRunning && !prevIsRunning.current) {
+      prevIsRunning.current = true;
+      setViewingStep(1);
+    }
+  }, [isRunning]);
+
+  // Auto-mark every completed step as visited so dots turn green progressively.
+  useEffect(() => {
+    if (currentStepNum > 0) {
+      setVisitedSteps(prev => {
+        const next = new Set(prev);
+        for (let i = 1; i < currentStepNum; i++) next.add(i);
+        return next;
+      });
+    }
+  }, [currentStepNum]);
 
   // On first completion, evict any null entries cached during the run and re-fetch them.
   useEffect(() => {
@@ -127,6 +148,7 @@ export default function PipelineScreen() {
           localProgress={localProgress}
           visitedSteps={visitedSteps}
           viewingStep={viewingStep}
+          currentStepNum={currentStepNum}
           onClickStep={handleClickStep}
         />
 
