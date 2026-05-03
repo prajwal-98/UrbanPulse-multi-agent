@@ -7,10 +7,10 @@ export default function Step5View({ data }: { data: any }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   if (!data) return <NoData />;
-  const issues: any[] = Array.isArray(data)
+  const issues: any[] = Array.isArray(data.items)
+    ? data.items
+    : Array.isArray(data)
     ? data
-    : Array.isArray(data.A5_output)
-    ? data.A5_output
     : [];
 
   if (issues.length === 0) return <NoData />;
@@ -21,7 +21,14 @@ export default function Step5View({ data }: { data: any }) {
         const category = issue.issue_category ?? issue.category ?? `Issue ${i + 1}`;
         const priority: string = issue.priority ?? "unknown";
         const reason: string = issue.reason ?? "";
-        const impact: string = issue.impact ?? "";
+        const impact = issue.impact ?? {};
+        const impactText = typeof impact === "object"
+          ? [
+              impact.affected_reviews_percent != null ? `${impact.affected_reviews_percent}% reviews affected` : null,
+              impact.cities?.length ? `Cities: ${impact.cities.join(", ")}` : null,
+              impact.platforms?.length ? `Platforms: ${impact.platforms.join(", ")}` : null,
+            ].filter(Boolean).join(" · ")
+          : String(impact);
         const teams: string[] = Array.isArray(issue.escalation_teams) ? issue.escalation_teams : [];
         const reviews: string[] = Array.isArray(issue.supporting_reviews) ? issue.supporting_reviews : [];
         const isOpen = openIndex === i;
@@ -49,10 +56,10 @@ export default function Step5View({ data }: { data: any }) {
                     <p className="text-xs text-slate-700 leading-relaxed">{reason}</p>
                   </div>
                 )}
-                {impact && (
+                {impactText && (
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-1">Impact</p>
-                    <p className="text-xs text-slate-700 leading-relaxed">{impact}</p>
+                    <p className="text-xs text-slate-700 leading-relaxed">{impactText}</p>
                   </div>
                 )}
                 {teams.length > 0 && (

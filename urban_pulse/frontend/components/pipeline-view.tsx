@@ -1,7 +1,18 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession } from "@/contexts/session-context";
+import Step1View from "@/components/step1-view";
+import Step2View from "./pipeline/steps/step2-view";
+import Step3View from "./pipeline/steps/step3-view";
+import Step4View from "./pipeline/steps/step4-view";
+import Step5View from "./pipeline/steps/step5-view";
+import Step6View from "./pipeline/steps/step6-view";
+import Step7View from "./pipeline/steps/step7-view";
+import { NoData } from "./pipeline/pipeline-shared-ui";
+
+const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 const STEPS = [
   {
@@ -56,9 +67,26 @@ const STEPS = [
 
 export default function PipelineView({ stepNum }: { stepNum: number }) {
   const session = useSession();
+  const [stepData, setStepData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
   const isComplete = session.pipelineStatus === "complete";
   const isIdle     = session.pipelineStatus === "idle";
+
+  useEffect(() => {
+    if (!session.sessionId || stepNum === 8 || isIdle) return;
+
+    setLoading(true);
+    fetch(`${BACKEND}/steps/${session.sessionId}/${stepNum}`)
+      .then(res => res.json())
+      .then(json => {
+        setStepData(json.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [session.sessionId, stepNum, isIdle]);
 
   const thisStep = STEPS.find((s) => s.num === stepNum)!;
   const isVisited = session.currentStep >= stepNum;
@@ -206,50 +234,50 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
               : "bg-gradient-to-r from-amber-400 to-amber-300"
             }`} />
 
-            <div className="py-12 px-8 flex flex-col items-center text-center gap-5">
+            <div className="px-8 py-6">
+              {loading && (
+                <div className="py-12 flex flex-col items-center text-center gap-3">
+                  <div className="w-6 h-6 border-2 border-slate-300 border-t-slate-700 rounded-full animate-spin" />
+                  <p className="text-xs text-slate-400">Loading step data…</p>
+                </div>
+              )}
 
-              {/* Icon */}
-              <div className={`w-14 h-14 rounded-full flex items-center justify-center
-                ${displayStatus === "complete" ? "bg-emerald-50 border border-emerald-200"
-                : "bg-amber-50 border border-amber-200"}`}
-              >
-                {displayStatus === "complete" ? (
-                  <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                )}
-              </div>
+              {!loading && stepNum === 8 && (
+                <div className="py-12 flex flex-col items-center text-center gap-5">
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-slate-900 mb-1.5">Intelligence Ready</p>
+                    <p className="text-xs text-slate-400 leading-relaxed max-w-xs">
+                      All 8 agents have completed. Full intelligence report is ready in the dashboard.
+                    </p>
+                  </div>
+                  <Link
+                    href="/dashboard"
+                    className="mt-1 flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
+                  >
+                    View Intelligence Dashboard
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              )}
 
-              {/* Status pill */}
-              <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-semibold uppercase tracking-wider
-                ${displayStatus === "complete" ? "bg-emerald-50 border-emerald-200 text-emerald-700"
-                : "bg-amber-50 border-amber-200 text-amber-700"}`}
-              >
-                {displayStatus === "complete" ? "Viewed" : "Ready to explore"}
-              </div>
-
-              {/* Human-readable message */}
-              <div>
-                <h2 className="text-lg font-semibold text-slate-900 tracking-tight">
-                  {displayStatus === "complete" ? thisStep.doneMsg : thisStep.activeMsg}
-                </h2>
-              </div>
-
-              {/* Dashboard CTA when pipeline is complete */}
-              {isComplete && (
-                <Link
-                  href="/dashboard"
-                  className="mt-2 flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
-                >
-                  View Intelligence Dashboard
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+              {!loading && stepNum !== 8 && (
+                <>
+                  {stepNum === 1 && <Step1View data={stepData} />}
+                  {stepNum === 2 && <Step2View data={stepData} />}
+                  {stepNum === 3 && <Step3View data={stepData} />}
+                  {stepNum === 4 && <Step4View data={stepData} />}
+                  {stepNum === 5 && <Step5View data={stepData} />}
+                  {stepNum === 6 && <Step6View data={stepData} />}
+                  {stepNum === 7 && <Step7View data={stepData} />}
+                  {!stepData && <NoData />}
+                </>
               )}
             </div>
           </div>

@@ -11,8 +11,16 @@ export default function Step7View({ data }: { data: any }) {
   const sentimentMapping: any[] = Array.isArray(out.sentiment_mapping) ? out.sentiment_mapping : [];
   const emergingSlang: any[] = Array.isArray(out.emerging_slang) ? out.emerging_slang : [];
 
-  if (!slangIntelligence.length && !citySlang.length && !sentimentMapping.length && !emergingSlang.length) return <NoData />;
-
+  if (!slangIntelligence.length && !citySlang.length && !sentimentMapping.length && !emergingSlang.length) {
+    return (
+      <div className="py-14 flex flex-col items-center text-center gap-3">
+        <p className="text-sm font-semibold text-slate-600">No Language Patterns Detected</p>
+        <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
+          No city-specific slang was found in this dataset. Try uploading reviews with more localized language.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="space-y-6">
       {slangIntelligence.length > 0 && (
