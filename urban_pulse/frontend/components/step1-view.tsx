@@ -241,28 +241,33 @@ export default function Step1View({ data, onContinue }: Step1ViewProps) {
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="text-xs font-bold text-slate-800 mb-3">Key Highlights</p>
-            <div className="space-y-3">
+          <div className="bg-slate-900 text-white rounded-xl p-4">
+            <div className="mb-4">
+              <p className="text-xs font-bold mb-1">Key signals</p>
+              <p className="text-[10px] text-slate-400">Extracted by Gatekeeper</p>
+            </div>
+            <div>
               {[
-                { label: "Top Platform", sub: "Highest review volume", value: highlights.top_platform, badgeColor: "bg-blue-100 text-blue-700" },
-                { label: "Dominant Category", sub: "Most reviewed product type", value: highlights.top_category, badgeColor: "bg-purple-100 text-purple-700" },
-                { label: "Peak Activity", sub: "Highest review density", value: highlights.peak_month, badgeColor: "bg-amber-100 text-amber-700" },
+                { label: "Top Platform", value: highlights.top_platform, badgeColor: "bg-blue-500", initial: highlights.top_platform?.[0]?.toUpperCase() },
+                { label: "Dominant Category", value: highlights.top_category, badgeColor: "bg-purple-500", initial: highlights.top_category?.[0]?.toUpperCase() },
+                { label: "Peak Activity", value: highlights.peak_month, badgeColor: "bg-amber-500", initial: highlights.peak_month?.[0]?.toUpperCase() },
               ]
                 .filter((h) => h.value != null)
-                .map(({ label, sub, value, badgeColor }) => (
-                  <div key={label} className="flex items-center justify-between gap-3 py-2">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[10px] font-semibold text-slate-600 uppercase tracking-wide">{label}</p>
-                      <p className="text-[10px] text-slate-400 mt-0.5">{sub}</p>
-                    </div>
-                    <div className={`px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 ${badgeColor}`}>
-                      {String(value)}
+                .map(({ label, value, badgeColor, initial }, i, arr) => (
+                  <div key={label} className={i < arr.length - 1 ? "border-b border-slate-700" : ""}>
+                    <div className="flex items-center gap-3 py-3">
+                      <div className={`w-8 h-8 rounded-full ${badgeColor} text-white flex items-center justify-center text-xs font-bold shrink-0`}>
+                        {initial}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[10px] text-slate-400 uppercase tracking-wide">{label}</p>
+                        <p className="text-sm font-bold text-white">{String(value)}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
               {!highlights.top_platform && !highlights.top_category && !highlights.peak_month && (
-                <p className="text-xs text-slate-400 italic">No highlights available</p>
+                <p className="text-xs text-slate-400 italic">No signals available</p>
               )}
             </div>
           </div>

@@ -9,7 +9,9 @@ def _strip_state(state: dict) -> dict:
     """Remove non-serializable objects (DataFrames) from LangGraph state."""
     result = {}
     for k, v in state.items():
-        if isinstance(v, pd.DataFrame):
+        if k == "A1_sample" and isinstance(v, pd.DataFrame):
+            result[k] = v.to_dict(orient="records")
+        elif isinstance(v, pd.DataFrame):
             result[k] = f"<DataFrame rows={len(v)}>"
         elif isinstance(v, dict):
             result[k] = _strip_state(v)
