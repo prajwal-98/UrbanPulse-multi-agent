@@ -26,9 +26,18 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
         state["A3_reasoning"] = "No data available"
         return state
 
-    reviews = df["raw_text"].fillna("").astype(str).tolist()
+    # --------------------------------
+    # 1.5. SENTIMENT FILTER
+    # --------------------------------
+    pattern_df = df
+    if "star_rating" in df.columns:
+        filtered = df[df["star_rating"] <= 3]
+        if len(filtered) >= 2:
+            pattern_df = filtered
 
-    if len(reviews) < 3:
+    reviews = pattern_df["raw_text"].fillna("").astype(str).tolist()
+
+    if len(reviews) < 2:
         state["A3_output"] = _empty_output()
         state["A3_reasoning"] = "Not enough reviews"
         return state
@@ -44,6 +53,7 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     )
 
     tfidf_matrix = tfidf.fit_transform(reviews)
+    tfidf_matrix = tfidf_matrix.astype(np.float32)
 
     # -------------------------------
     # 3. SMART ANCHOR SELECTION
@@ -51,7 +61,13 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     row_sums = tfidf_matrix.sum(axis=1).A1
     anchor_idx = int(np.argmax(row_sums))
 
-    anchor_review = reviews[anchor_idx]
+    anchor_row = pattern_df.iloc[anchor_idx]
+    anchor_review = {
+        "text": reviews[anchor_idx],
+        "city": str(anchor_row["city"]) or None if "city" in pattern_df.columns else None,
+        "platform": str(anchor_row["platform"]) or None if "platform" in pattern_df.columns else None,
+        "rating": float(anchor_row["star_rating"]) if "star_rating" in pattern_df.columns and pd.notna(anchor_row["star_rating"]) else None
+    }
     anchor_vector = tfidf_matrix[anchor_idx]
 
     # -------------------------------
@@ -71,15 +87,19 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     for i in sorted_idx:
         score = similarities[i]
 
-        if score < 0.05:
+        if score < 0.01:
             continue
 
         text = reviews[i].strip()
 
-        if text and text not in seen and text != anchor_review:
+        if text and text not in seen and text != anchor_review["text"]:
+            row = pattern_df.iloc[i]
             similar_pairs.append({
                 "text": text,
-                "score": round(float(score), 2)
+                "score": round(float(score), 2),
+                "city": str(row["city"]) or None if "city" in pattern_df.columns else None,
+                "platform": str(row["platform"]) or None if "platform" in pattern_df.columns else None,
+                "rating": float(row["star_rating"]) if "star_rating" in pattern_df.columns and pd.notna(row["star_rating"]) else None
             })
             seen.add(text)
 
@@ -87,6 +107,10 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
             break
 
     similar_reviews = [x["text"] for x in similar_pairs]
+    pattern_count = len(similar_pairs)
+    scores = [p["score"] for p in similar_pairs]
+    avg_score = sum(scores) / len(scores) if scores else 0
+    similarity_label = "High" if avg_score > 0.3 else "Medium" if avg_score > 0.15 else "Low"
 
     # -------------------------------
     # 6. THEME DETECTION (RULE FIRST)
@@ -118,10 +142,19 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     # -------------------------------
     # 7. OUTPUT
     # -------------------------------
+    a2 = state.get("A2_output", {})
+    extracted_meaning = {
+        "primary_issue": a2.get("operational_context", "") or "—",
+        "experience_type": a2.get("top_themes", ["—"])[0] if a2.get("top_themes") else "—"
+    }
+
     state["A3_output"] = {
         "anchor_review": anchor_review,
         "similar_reviews": similar_pairs,
-        "semantic_theme": theme.strip()
+        "semantic_theme": theme.strip(),
+        "pattern_count": pattern_count,
+        "similarity_label": similarity_label,
+        "extracted_meaning": extracted_meaning
     }
 
     state["A3_reasoning"] = "TF-IDF + cosine similarity + hybrid theme detection applied"
@@ -145,9 +178,12 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
 
 def _empty_output():
     return {
-        "anchor_review": "",
+        "anchor_review": {},
         "similar_reviews": [],
-        "semantic_theme": ""
+        "semantic_theme": "",
+        "pattern_count": 0,
+        "similarity_label": "Low",
+        "extracted_meaning": {"primary_issue": "—", "experience_type": "—"}
     }
 
 
