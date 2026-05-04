@@ -25,7 +25,8 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
     # 2. CITY CONTEXT
     # -------------------------------
     active_filters = state.get("active_filters", {})
-    city = (active_filters.get("city") or ["Bangalore"])[0]
+    cities = active_filters.get("cities") or []
+    city = cities[0] if cities else "Bangalore"
 
     slang_reference = CITY_SLANG_MAP.get(city, [])
 
@@ -36,7 +37,7 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
         df.get("raw_text", pd.Series())
         .dropna()
         .astype(str)
-        .head(10)
+        .head(30)
         .tolist()
     )
 
@@ -48,16 +49,19 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
 
     Slang Reference: {slang_reference}
 
-    Reviews:
+    Reviews (analyze all {len(sample_reviews)} reviews):
     {sample_reviews}
 
-    Return STRICT JSON:
+    Return STRICT JSON only, no explanation:
 
     {{
-        "localized_sentiment": "short summary",
-        "slang_detected": ["list"],
-        "operational_context": "what is going wrong",
-        "top_themes": ["3-5 issues"]
+        "localized_sentiment": "2-3 sentence summary of overall customer mood",
+        "sentiment_score": "positive or neutral or negative",
+        "slang_detected": ["slang1", "slang2"],
+        "operational_context": "1-2 sentences on what operational problem is happening",
+        "top_themes": ["theme1", "theme2", "theme3", "theme4", "theme5"],
+        "city_context": "1 sentence on what makes this city unique for Q-commerce",
+        "urgency_level": "low or medium or high"
     }}
     """
 
@@ -79,13 +83,48 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
     parsed = _safe_parse(raw_response)
 
     # -------------------------------
-    # 7. STORE OUTPUT
+    # 7. BUILD TOP ENTITIES FROM DF
+    # -------------------------------
+    top_entities = {"cities": [], "platforms": [], "categories": []}
+    try:
+        top_entities["cities"] = df["city"].value_counts().head(3).index.tolist()
+    except Exception:
+        pass
+    try:
+        top_entities["platforms"] = df["platform"].value_counts().head(3).index.tolist()
+    except Exception:
+        pass
+    try:
+        top_entities["categories"] = df["category"].value_counts().head(3).index.tolist()
+    except Exception:
+        pass
+
+    # Sample 3 real reviews
+    sample_reviews = []
+    try:
+        sampled_df = df.sample(min(3, len(df)), random_state=42)
+        sample_reviews = [
+            {"text": row.get("raw_text", ""), "platform": row.get("platform", ""), "city": row.get("city", "")}
+            for _, row in sampled_df.iterrows()
+        ]
+    except Exception:
+        pass
+
+    # -------------------------------
+    # 8. STORE OUTPUT
     # -------------------------------
     state["A2_output"] = {
+        "city": city,
+        "review_count": len(df),
         "localized_sentiment": parsed.get("localized_sentiment", ""),
+        "sentiment_score": parsed.get("sentiment_score", "neutral"),
         "slang_detected": parsed.get("slang_detected", []),
         "operational_context": parsed.get("operational_context", ""),
-        "top_themes": parsed.get("top_themes", [])
+        "top_themes": parsed.get("top_themes", []),
+        "city_context": parsed.get("city_context", ""),
+        "urgency_level": parsed.get("urgency_level", "medium"),
+        "top_entities": top_entities,
+        "sample_reviews": sample_reviews,
     }
 
     state["A2_reasoning"] = "Success"
@@ -109,10 +148,17 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
 
 def _empty_output(msg):
     return {
+        "city": "",
+        "review_count": 0,
         "localized_sentiment": msg,
+        "sentiment_score": "neutral",
         "slang_detected": [],
         "operational_context": msg,
-        "top_themes": []
+        "top_themes": [],
+        "city_context": "",
+        "urgency_level": "medium",
+        "top_entities": {"cities": [], "platforms": [], "categories": []},
+        "sample_reviews": [],
     }
 
 

@@ -71,7 +71,7 @@ export const defaultFilters: Filters = {
 
 export const defaultState: SessionState = {
   mode: "demo",
-  apiKey: "AIzaSyAGLxwsXu-jZ9CS-_bnwi7hNDj7f7lU6Qg",
+  apiKey: "",
   model: "gemini-3.1-flash-lite-preview",
   sessionId: null,
   filename: null,
