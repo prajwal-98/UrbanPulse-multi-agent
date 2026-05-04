@@ -68,6 +68,14 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
             if "category" in df.columns else []
         )
 
+        rating_distribution = (
+            df["star_rating"]
+            .value_counts()
+            .reindex([1, 2, 3, 4, 5], fill_value=0)
+            .reset_index()
+            .values.tolist()
+        ) if "star_rating" in df.columns else []
+
         trend = []
         if "date" in df.columns:
             temp_df = df.copy()
@@ -77,12 +85,15 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
                 temp_df.groupby(temp_df["date"].dt.to_period("M"))
                 .size()
                 .reset_index(name="count")
+                .assign(date=lambda x: x["date"].astype(str))
+                [["date", "count"]]
                 .values.tolist()
-            )
+            ) if not temp_df.empty else []
 
         state["A1_charts"] = {
             "platform_distribution": platform_dist,
             "category_distribution": category_dist,
+            "rating_distribution": rating_distribution,
             "review_trend": trend,
         }
 
@@ -154,9 +165,18 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
             "categories": df["category"].nunique() if "category" in df.columns else 0,
         }
 
+        rating_distribution = (
+            df["star_rating"]
+            .value_counts()
+            .reindex([1, 2, 3, 4, 5], fill_value=0)
+            .reset_index()
+            .values.tolist()
+        ) if "star_rating" in df.columns else []
+
         state["A1_charts"] = {
             "platform_distribution": df["platform"].value_counts().reset_index().values.tolist() if "platform" in df.columns else [],
             "category_distribution": df["category"].value_counts().reset_index().values.tolist() if "category" in df.columns else [],
+            "rating_distribution": rating_distribution,
             # "review_trend": df.groupby(df["date"].dt.to_period("M")).size().reset_index().values.tolist() if "date" in df.columns else [],
             # with this
             "review_trend": (
@@ -179,6 +199,7 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
             "schema_valid": True,
             "missing_data_ok": not df.isnull().any().any(),
             "format_valid": True,
+            "null_rate": round(float(df.isnull().mean().mean()) * 100, 1),
         }
 
         state["A1_sample"] = df.head(10)

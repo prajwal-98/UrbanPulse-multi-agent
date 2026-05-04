@@ -158,3 +158,42 @@ export function LineChart({ data, title }: { data: [string, number][]; title: st
     </div>
   );
 }
+
+/* ─── Rating chart (horizontal bars) ───────────────────────────────── */
+
+export function RatingChart({ data, title }: { data: [number, number][]; title: string }) {
+  if (!data.length) return <EmptyChart title={title} />;
+
+  const sorted = [...data].sort(([a], [b]) => b - a);
+  const max = Math.max(...sorted.map(([, v]) => v), 1);
+
+  const colorMap: Record<number, string> = {
+    5: "#16a34a",
+    4: "#84cc16",
+    3: "#eab308",
+    2: "#f97316",
+    1: "#dc2626",
+  };
+
+  return (
+    <div>
+      <p className="text-xs font-bold text-slate-800 mb-3">{title}</p>
+      <div className="space-y-2">
+        {sorted.map(([star, count], i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="text-[11px] text-slate-500 w-7 shrink-0">{star}★</span>
+            <div className="flex-1 h-3 bg-slate-100 rounded overflow-hidden">
+              <div
+                className="h-full rounded transition-all duration-500"
+                style={{ width: `${(count / max) * 100}%`, background: colorMap[star] || "#64748b" }}
+              />
+            </div>
+            <span className="text-[11px] tabular-nums text-slate-500 shrink-0">
+              {count.toLocaleString()}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
