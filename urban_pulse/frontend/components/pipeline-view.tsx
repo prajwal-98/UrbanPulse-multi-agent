@@ -286,7 +286,12 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
 
               {!loading && stepNum !== 8 && (
                 <>
-                  {stepNum === 1 && <Step1View data={stepData} />}
+                  {stepNum === 1 && (
+                    <Step1View
+                      data={stepData}
+                      onContinue={isComplete ? () => router.push("/step-2") : undefined}
+                    />
+                  )}
                   {stepNum === 2 && <Step2View data={stepData} />}
                   {stepNum === 3 && <Step3View data={stepData} />}
                   {stepNum === 4 && <Step4View data={stepData} />}

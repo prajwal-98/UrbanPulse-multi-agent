@@ -139,7 +139,7 @@ export default function PipelineStepContent({
       case 1: return (
         <Step1View
           data={d}
-          onContinue={stepData[1] ? () => { setViewingStep(2); } : undefined}
+          onContinue={(isComplete || stepData[1]) ? () => { setViewingStep(2); } : undefined}
         />
       );
       case 2: return <Step2View data={d} />;

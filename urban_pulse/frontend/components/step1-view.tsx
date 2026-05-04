@@ -241,35 +241,26 @@ export default function Step1View({ data, onContinue }: Step1ViewProps) {
             </div>
           </div>
 
-          <div className="bg-slate-900 text-white rounded-xl p-4">
-            <div className="mb-4">
-              <p className="text-xs font-bold mb-1">Key signals</p>
-              <p className="text-[10px] text-slate-400">Extracted by Gatekeeper</p>
-            </div>
-            <div>
-              {[
-                { label: "Top Platform", value: highlights.top_platform, badgeColor: "bg-blue-500", initial: highlights.top_platform?.[0]?.toUpperCase() },
-                { label: "Dominant Category", value: highlights.top_category, badgeColor: "bg-purple-500", initial: highlights.top_category?.[0]?.toUpperCase() },
-                { label: "Peak Activity", value: highlights.peak_month, badgeColor: "bg-amber-500", initial: highlights.peak_month?.[0]?.toUpperCase() },
-              ]
-                .filter((h) => h.value != null)
-                .map(({ label, value, badgeColor, initial }, i, arr) => (
-                  <div key={label} className={i < arr.length - 1 ? "border-b border-slate-700" : ""}>
-                    <div className="flex items-center gap-3 py-3">
-                      <div className={`w-8 h-8 rounded-full ${badgeColor} text-white flex items-center justify-center text-xs font-bold shrink-0`}>
-                        {initial}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wide">{label}</p>
-                        <p className="text-sm font-bold text-white">{String(value)}</p>
-                      </div>
-                    </div>
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { label: "Top Platform", value: highlights.top_platform, iconBg: "bg-blue-100", iconStroke: "text-blue-600", iconPath: "M5 3h14M5 21h14M3 12h18M12 3v18" },
+              { label: "Dominant Category", value: highlights.top_category, iconBg: "bg-purple-100", iconStroke: "text-purple-600", iconPath: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" },
+              { label: "Peak Activity", value: highlights.peak_month, iconBg: "bg-amber-100", iconStroke: "text-amber-600", iconPath: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
+            ]
+              .filter((h) => h.value != null)
+              .map(({ label, value, iconBg, iconStroke, iconPath }) => (
+                <div key={label} className="bg-white border border-slate-200 rounded-xl p-3.5 flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-lg ${iconBg} flex items-center justify-center shrink-0`}>
+                    <svg className={`w-[18px] h-[18px] ${iconStroke}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
+                    </svg>
                   </div>
-                ))}
-              {!highlights.top_platform && !highlights.top_category && !highlights.peak_month && (
-                <p className="text-xs text-slate-400 italic">No signals available</p>
-              )}
-            </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-0.5">{label}</p>
+                    <p className="text-sm font-bold text-slate-900 truncate">{String(value)}</p>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       )}
