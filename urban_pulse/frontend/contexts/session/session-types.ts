@@ -35,6 +35,7 @@ export interface SessionState {
   currentStep: number;
   visitedSteps: number[];
   error: string | null;
+  stepStatus: Record<string, string>;
 }
 
 export interface SessionContextValue extends SessionState {
@@ -70,8 +71,8 @@ export const defaultFilters: Filters = {
 
 export const defaultState: SessionState = {
   mode: "demo",
-  apiKey: "",
-  model: "gemini-2.0-flash-lite",
+  apiKey: "AIzaSyAGLxwsXu-jZ9CS-_bnwi7hNDj7f7lU6Qg",
+  model: "gemini-3.1-flash-lite-preview",
   sessionId: null,
   filename: null,
   uploadStatus: "idle",
@@ -82,4 +83,5 @@ export const defaultState: SessionState = {
   currentStep: 0,
   visitedSteps: [],
   error: null,
+  stepStatus: {},
 };

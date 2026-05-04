@@ -62,7 +62,7 @@ export function createSessionActions(
         setState((s) => ({
           ...s,
           progress: data.progress ?? s.progress,
-          currentStep: data.current_step ?? s.currentStep,
+          currentStep: data.status === "complete" ? 1 : (parseInt(String(data.current_step ?? "").replace("A",""), 10) || s.currentStep),
           pipelineStatus:
             data.status === "complete"
               ? "complete"
@@ -70,6 +70,7 @@ export function createSessionActions(
               ? "error"
               : "running",
           error: data.status === "error" ? data.error ?? "Unknown error" : s.error,
+          stepStatus: data.step_status ?? s.stepStatus,
         }));
         if (data.status === "complete" || data.status === "error") {
           clearInterval(interval);

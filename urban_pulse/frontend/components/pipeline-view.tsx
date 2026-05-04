@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSession } from "@/contexts/session-context";
 import Step1View from "@/components/step1-view";
 import Step2View from "./pipeline/steps/step2-view";
@@ -66,6 +67,7 @@ const STEPS = [
 ];
 
 export default function PipelineView({ stepNum }: { stepNum: number }) {
+  const router = useRouter();
   const session = useSession();
   const [stepData, setStepData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -74,7 +76,7 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
   const isIdle     = session.pipelineStatus === "idle";
 
   useEffect(() => {
-    if (!session.sessionId || stepNum === 8 || isIdle) return;
+    if (!session.sessionId || stepNum === 8 || isIdle || (!isComplete && session.pipelineStatus !== "complete")) return;
 
     setLoading(true);
     fetch(`${BACKEND}/steps/${session.sessionId}/${stepNum}`)
@@ -86,7 +88,7 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
       .catch(() => {
         setLoading(false);
       });
-  }, [session.sessionId, stepNum, isIdle]);
+  }, [session.sessionId, stepNum, isIdle, session.pipelineStatus]);
 
   const thisStep = STEPS.find((s) => s.num === stepNum)!;
   const isVisited = session.currentStep >= stepNum;
@@ -96,7 +98,7 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
 
   /* ─── Pipeline progress strip ───────────────────── */
   function StepNode({ s }: { s: (typeof STEPS)[number] }) {
-    const visited = session.currentStep >= s.num;
+    const visited = session.stepStatus?.[s.agent] === "done" || session.pipelineStatus === "complete";
     const viewing = s.num === stepNum;
     const navigable = canNavigate();
 
@@ -172,41 +174,56 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
             Pipeline Progress
           </p>
 
-          {/* Nodes + connecting lines */}
-          <div className="flex items-start overflow-x-auto pb-2">
-            {STEPS.map((s, i) => {
-              const visited = session.currentStep >= s.num;
-              return (
-                <div key={s.agent} className="flex items-start shrink-0">
-                  <StepNode s={s} />
-                  {i < STEPS.length - 1 && (
-                    <div className={`h-px w-6 mt-4 mx-0.5 shrink-0 transition-colors ${visited ? "bg-emerald-300" : "bg-amber-200"}`} />
-                  )}
-                </div>
-              );
-            })}
+          {/* Nodes + connecting lines with prev/next buttons */}
+          <div className="flex items-center justify-center gap-4">
+            {/* Prev button */}
+            <button
+              onClick={() => router.push(STEPS[stepNum - 2].href)}
+              disabled={stepNum === 1}
+              title="Previous agent"
+              className={`flex-shrink-0 w-9 h-9 rounded-full border border-slate-200 bg-white shadow-sm flex items-center justify-center transition-all ${
+                stepNum === 1
+                  ? "opacity-30 cursor-not-allowed pointer-events-none"
+                  : "hover:bg-slate-50 hover:border-slate-300 hover:shadow"
+              }`}
+            >
+              <svg className="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Dots */}
+            <div className="flex items-start overflow-x-auto pb-2">
+              {STEPS.map((s, i) => {
+                const visited = session.stepStatus?.[s.agent] === "done" || session.pipelineStatus === "complete";
+                return (
+                  <div key={s.agent} className="flex items-start shrink-0">
+                    <StepNode s={s} />
+                    {i < STEPS.length - 1 && (
+                      <div className={`h-px w-6 mt-4 mx-0.5 shrink-0 transition-colors ${visited ? "bg-emerald-300" : "bg-amber-200"}`} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Next button */}
+            <button
+              onClick={() => router.push(STEPS[stepNum].href)}
+              disabled={stepNum === 8}
+              title="Next agent"
+              className={`flex-shrink-0 w-9 h-9 rounded-full border border-slate-200 bg-white shadow-sm flex items-center justify-center transition-all ${
+                stepNum === 8
+                  ? "opacity-30 cursor-not-allowed pointer-events-none"
+                  : "hover:bg-slate-50 hover:border-slate-300 hover:shadow"
+              }`}
+            >
+              <svg className="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
 
-          {/* Overall progress bar */}
-          {!isIdle && (
-            <div className="mt-5 pt-4 border-t border-slate-100">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-                  Overall Progress
-                </span>
-                <span className="text-[10px] font-bold tabular-nums text-slate-600">
-                  {session.progress}%
-                </span>
-              </div>
-              <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-700 ease-out
-                    ${isComplete ? "bg-emerald-500" : "bg-amber-500"}`}
-                  style={{ width: `${session.progress}%` }}
-                />
-              </div>
-            </div>
-          )}
         </div>
 
         {/* ── Status card ── */}
