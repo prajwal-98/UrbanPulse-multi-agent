@@ -17,6 +17,7 @@ class UploadResponse(BaseModel):
     total_rows: int
     filter_options: FilterOptions
     mode: str  # "live" | "demo"
+    pipeline_status: str = "idle"
 
 
 class AnalysisStatus(BaseModel):

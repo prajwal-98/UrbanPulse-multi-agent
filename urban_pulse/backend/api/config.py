@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent  # urban_pulse_v2/
 UPLOAD_DIR = BASE_DIR / "uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-DEMO_DATA_PATH = BASE_DIR / "data" / "demo_dataset.csv"
+DEMO_DATA_PATH = BASE_DIR / "data" / "demo" / "demo_source.csv"
 
 CORS_ORIGINS = [
     "http://localhost:3000",

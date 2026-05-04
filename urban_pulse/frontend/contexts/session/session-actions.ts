@@ -20,6 +20,7 @@ export function createSessionActions(
       date_max?: string | null;
       total_rows: number;
     };
+    pipeline_status?: string;
   }) => {
     localStorage.setItem("session_id", data.session_id);
     const opts = data.filter_options;
@@ -43,7 +44,7 @@ export function createSessionActions(
         platforms: [],
         categories: [],
       },
-      pipelineStatus: "idle",
+      pipelineStatus: data.pipeline_status === "complete" ? "complete" : "idle",
       progress: 0,
       currentStep: 0,
       error: null,

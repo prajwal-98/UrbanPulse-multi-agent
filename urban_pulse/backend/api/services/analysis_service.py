@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Add urban_pulse_v2/ to sys.path so orchestrator.py's bare imports
 # (from core.schema, from agents.*) resolve correctly.
-_UP2_DIR = Path(__file__).resolve().parent.parent.parent.parent  # …/urban_pulse_v2
+_UP2_DIR = Path(__file__).resolve().parent.parent.parent.parent  # ../urban_pulse_v2
 if str(_UP2_DIR) not in sys.path:
     sys.path.insert(0, str(_UP2_DIR))
 
@@ -20,7 +20,7 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
 
     session = get_session(session_id)
     if not session:
-        print(f"[PIPELINE ERROR] Session {session_id} not found — aborting.", flush=True)
+        print(f"[PIPELINE ERROR] Session {session_id} not found - aborting.", flush=True)
         return
 
     set_session(session_id, {
@@ -32,9 +32,9 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
     })
 
     try:
-        # Use bare import — consistent with orchestrator.py's own bare imports
+        # Use bare import - consistent with orchestrator.py's own bare imports
         # (from core.schema / from agents.*) so all modules share one registration.
-        print("[PIPELINE] Importing orchestrator…", flush=True)
+        print("[PIPELINE] Importing orchestrator...", flush=True)
         from core.orchestrator import build_urban_pulse_graph
         print("[PIPELINE] Orchestrator imported.", flush=True)
 
@@ -77,9 +77,9 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
             "step_status": {"A1": "running", **{f"A{i}": "pending" for i in range(2, 9)}},
         })
 
-        print("[PIPELINE] Building graph…", flush=True)
+        print("[PIPELINE] Building graph...", flush=True)
         graph = build_urban_pulse_graph()
-        print("[PIPELINE] Graph built. Starting stream…", flush=True)
+        print("[PIPELINE] Graph built. Starting stream...", flush=True)
 
         # stream_mode="values" yields the full accumulated state after each node,
         # so final_state is complete and we never re-invoke the pipeline.
@@ -95,14 +95,14 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
             if newly_done:
                 step_num = max(newly_done)
                 progress = step_weights.get(step_num, 50)
-                print(f"[PIPELINE] A{step_num} complete → {progress}%", flush=True)
+                print(f"[PIPELINE] A{step_num} complete -> {progress}%", flush=True)
                 # Build per-step status: everything up to step_num is done,
                 # the next step is running, the rest are pending.
                 step_status = {f"A{i}": "done" for i in range(1, step_num + 1)}
                 if step_num < 8:
                     step_status[f"A{step_num + 1}"] = "running"
                     step_status.update({f"A{i}": "pending" for i in range(step_num + 2, 9)})
-                    print(f"[PIPELINE] A{step_num + 1} starting…", flush=True)
+                    print(f"[PIPELINE] A{step_num + 1} starting...", flush=True)
                 current_session = get_session(session_id) or session
                 stripped_partial = _strip_state(
                     state_snapshot if isinstance(state_snapshot, dict) else {}
@@ -118,7 +118,7 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
                 })
 
         if final_state is None:
-            print("[PIPELINE] Stream yielded nothing — falling back to invoke()", flush=True)
+            print("[PIPELINE] Stream yielded nothing - falling back to invoke()", flush=True)
             final_state = graph.invoke(input_state)
 
         stripped = _strip_state(final_state if isinstance(final_state, dict) else {})
@@ -132,7 +132,9 @@ def run_pipeline_sync(session_id: str, api_key: str, model: str, filters: dict) 
             "step_status": {f"A{i}": "done" for i in range(1, 9)},
             "error": None,
         })
-        print(f"[PIPELINE] Complete ✓ session={session_id}", flush=True)
+        print(f"[PIPELINE] Complete [OK] session={session_id}", flush=True)
+        from .state_service import save_snapshot
+        save_snapshot(stripped)
 
     except Exception as exc:
         tb = traceback.format_exc()

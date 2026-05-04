@@ -49,10 +49,13 @@ async def use_demo_dataset():
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to load demo data: {exc}")
 
+    from ..services.state_service import load_snapshot
+    has_snapshot = load_snapshot() is not None
     return UploadResponse(
         session_id=session_id,
         filename="demo_dataset.csv",
         total_rows=filter_opts.total_rows,
         filter_options=filter_opts,
         mode="demo",
+        pipeline_status="complete" if has_snapshot else "idle",
     )

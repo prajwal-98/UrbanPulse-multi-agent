@@ -114,12 +114,12 @@ async def save_upload(file_bytes: bytes, filename: str) -> tuple[str, pd.DataFra
 
 
 async def load_demo_session() -> tuple[str, pd.DataFrame, FilterOptions]:
+    from .state_service import load_snapshot
     session_id = create_session()
 
     if DEMO_DATA_PATH.exists():
         df = pd.read_csv(DEMO_DATA_PATH)
     else:
-        # Minimal synthetic demo data so the backend never crashes
         df = pd.DataFrame({
             "date": pd.date_range("2024-01-01", periods=100, freq="D"),
             "platform": (["Blinkit"] * 40 + ["Zepto"] * 35 + ["Swiggy Instamart"] * 25),
@@ -132,15 +132,17 @@ async def load_demo_session() -> tuple[str, pd.DataFrame, FilterOptions]:
 
     df = normalize_dataframe(df)
     filter_opts = _extract_filter_options(df)
+    snapshot = load_snapshot()
 
     set_session(session_id, {
         "df": df,
         "filename": "demo_dataset.csv",
         "mode": "demo",
-        "state": None,
-        "status": "pending",
-        "progress": 0,
-        "current_step": None,
+        "state": snapshot,
+        "status": "complete" if snapshot else "pending",
+        "progress": 100 if snapshot else 0,
+        "current_step": "A8" if snapshot else None,
+        "step_status": {f"A{i}": "done" for i in range(1, 9)} if snapshot else {},
         "error": None,
     })
     return session_id, df, filter_opts
