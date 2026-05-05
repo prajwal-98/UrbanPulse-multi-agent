@@ -10,7 +10,7 @@ from backend.api.services.file_service import load_demo_session
 from backend.api.services.analysis_service import run_pipeline_sync
 import asyncio
 
-API_KEY = ""
+API_KEY = "AIzaSyA1tvtSAVI5b4i9o87synyoI_r500g8i0A"
 MODEL = "gemini-3.1-flash-lite-preview"
 
 async def main():
