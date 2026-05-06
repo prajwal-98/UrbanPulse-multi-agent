@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "@/contexts/session-context";
 import type { DashboardApiData } from "@/lib/api";
 import { fetchDashboardData } from "@/lib/api";
-import ExecutiveDashboard from "@/components/executive-dashboard";
+import BriefDashboard from "@/components/brief-dashboard";
 
 export default function DashboardPage() {
   const { sessionId } = useSession();
@@ -120,5 +120,5 @@ export default function DashboardPage() {
     );
   }
 
-  return <ExecutiveDashboard data={data} />;
+  return <BriefDashboard data={data as any} />;
 }

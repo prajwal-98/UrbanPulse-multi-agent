@@ -51,15 +51,16 @@ def build_impact(size, negative_pct):
 def build_root_cause(peak_time, issue):
     return f"High demand during {peak_time} combined with operational inefficiencies is driving {issue.lower()}."
 
-
 def build_actions(a5):
     actions = []
 
-    for item in a5[:3]:
+    items = a5 if isinstance(a5, list) else a5.get("items", []) if isinstance(a5, dict) else []
+
+    for item in items[:3]:
         actions.append({
-            "title": f"{item.get('issue_category')} Fix",
-            "description": item.get("reason"),
-            "priority": item.get("priority"),
+            "title": f"{item.get('issue_category', 'Issue')} Fix",
+            "description": item.get("reason", ""),
+            "priority": item.get("priority", "Medium"),
         })
 
     if not actions:
@@ -73,20 +74,18 @@ def build_actions(a5):
 
     return actions
 
-
-def build_evidence(df):
-    return df["raw_text"].dropna().head(5).tolist()
-
-
 def build_language_highlights(a7):
     slang_data = a7.get("slang_intelligence", [])
-
     language_highlights = []
     for s in slang_data[:3]:
+        sentiment_dict = s.get("sentiment", {})
+        sentiment = max(sentiment_dict, key=sentiment_dict.get) if sentiment_dict else "neutral"
         language_highlights.append({
             "slang": s.get("slang"),
             "usage": s.get("total_usage"),
-            "sentiment": max(s.get("sentiment", {}), key=s.get("sentiment", {}).get),
+            "sentiment": sentiment,
         })
-
     return language_highlights
+
+def build_evidence(df):
+    return df["raw_text"].dropna().head(5).tolist()

@@ -81,7 +81,7 @@ class DashboardDataModel(BaseModel):
 class DashboardResponse(BaseModel):
     session_id: str
     status: str
-    data: Optional[DashboardDataModel] = None
+    data: Optional[Dict[str, Any]] = None
 
 
 class FilterPreviewResponse(BaseModel):

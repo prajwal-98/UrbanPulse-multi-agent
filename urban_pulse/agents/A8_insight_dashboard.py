@@ -20,7 +20,8 @@ def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
 
     df = state.get("filtered_df")
     a4 = state.get("A4_output", {}).get("clusters", [])
-    a5 = state.get("A5_output", [])
+    a5_raw = state.get("A5_output", [])
+    a5 = a5_raw.get("items", []) if isinstance(a5_raw, dict) else a5_raw    
     a6 = state.get("A6_output", {})
     a7 = state.get("A7_output", {})
 

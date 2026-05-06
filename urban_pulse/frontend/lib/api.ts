@@ -31,15 +31,33 @@ export interface DashboardDriver {
   impact: string | null;        // "High" | "Medium" | "Low"
   recommendation: string | null;
 }
-
 export interface DashboardApiData {
-  kpis: DashboardKPIs | null;
-  executive_summary: DashboardExecutiveSummary | null;
-  hero_alert: DashboardHeroAlert | null;
-  time_insights: DashboardTimeInsights | null;
-  drivers: DashboardDriver[];
+  story: string | null;
+  confidence: number | null;
+  drivers: string[];
+  metrics: {
+    total_reviews: number;
+    negative_percent: number;
+    top_issue: string;
+    top_brand: string;
+  } | null;
+  impact: {
+    revenue_risk: string;
+    affected_reviews: number;
+    urgency: string;
+  } | null;
+  breakdown: {
+    platform: { platform: string; share: number }[];
+    brand: { name: string; mentions: number }[];
+    category: { name: string; mentions?: number }[];
+    city: { city: string; mentions: number }[];
+    time: { label: string; peak?: string; quiet?: string };
+  } | null;
+  root_cause: string | null;
+  actions: { title: string; description: string; priority: string }[];
+  evidence: string[];
+  language: { slang: string; usage: number; sentiment: string }[];
 }
-
 // ── Fetch ─────────────────────────────────────────────────────────────────
 
 export async function fetchDashboardData(sessionId: string): Promise<DashboardApiData> {
