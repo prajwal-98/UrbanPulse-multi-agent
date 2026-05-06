@@ -1,4 +1,5 @@
 import sys
+import os
 from pathlib import Path
 
 # Setup path
@@ -10,8 +11,8 @@ from backend.api.services.file_service import load_demo_session
 from backend.api.services.analysis_service import run_pipeline_sync
 import asyncio
 
-API_KEY = "AIzaSyA1tvtSAVI5b4i9o87synyoI_r500g8i0A"
-MODEL = "gemini-3.1-flash-lite-preview"
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
+MODEL = "gemini-2.0-flash"
 
 async def main():
     session_id, _, _ = await load_demo_session()

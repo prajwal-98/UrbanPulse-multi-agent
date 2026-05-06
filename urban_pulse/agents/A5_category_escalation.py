@@ -11,6 +11,7 @@ def category_escalation_node(state: UrbanPulseState) -> UrbanPulseState:
     - Assign category, priority, escalation teams
     - Provide reasoning and impact
     """
+    print("[PIPELINE] A5 starting...", flush=True)
 
     clusters = state.get("A4_output", {}).get("clusters", [])
     print("A5 clusters:", len(clusters))
@@ -157,7 +158,7 @@ def category_escalation_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 6
-
+    print("[PIPELINE] A5 complete.", flush=True)
     return state
 
 

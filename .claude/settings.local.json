@@ -5,7 +5,10 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(cd /d \"D:\\\\UrbanPulse-multi-agent\\\\urban_pulse\\\\frontend\")",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(uvicorn backend.api.main:app --host 0.0.0.0 --port 8000)",
+      "Bash(python utils/llm_client.py)",
+      "PowerShell(Get-Process *)"
     ]
   }
 }

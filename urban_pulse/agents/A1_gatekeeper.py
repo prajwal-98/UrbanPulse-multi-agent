@@ -11,6 +11,7 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
     - Generate summary metrics for UI
     - Provide data quality signals
     """
+    print("[PIPELINE] A1 starting...", flush=True)
 
     df = state.get("raw_df")
 
@@ -217,5 +218,5 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
         steps.append(1)
     state["completed_steps"] = steps
     state["current_step"] = 2
-    
+    print("[PIPELINE] A1 complete.", flush=True)
     return state

@@ -16,6 +16,7 @@ def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
     - Impact
     - Actions
     """
+    print("[PIPELINE] A8 starting...", flush=True)
 
     df = state.get("filtered_df")
     a4 = state.get("A4_output", {}).get("clusters", [])
@@ -88,5 +89,5 @@ def decision_dashboard_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 9
-
+    print("[PIPELINE] A8 complete.", flush=True)
     return state

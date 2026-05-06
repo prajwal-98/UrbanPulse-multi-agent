@@ -12,6 +12,7 @@ def novelty_score_node(state: UrbanPulseState) -> UrbanPulseState:
     - Sentiment mapping (simple heuristic)
     - Emerging slang detection
     """
+    print("[PIPELINE] A7 starting...", flush=True)
 
     df = state.get("filtered_df")
     reasoning_steps = []
@@ -150,5 +151,5 @@ def novelty_score_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 8
-
+    print("[PIPELINE] A7 complete.", flush=True)
     return state

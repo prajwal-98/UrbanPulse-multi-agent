@@ -9,6 +9,7 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
     """
     Step 2 — Context Detection (A2)
     """
+    print("[PIPELINE] A2 starting...", flush=True)
 
     df = state.get("filtered_df")
 
@@ -138,7 +139,7 @@ def context_detector_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 3
-
+    print("[PIPELINE] A2 complete.", flush=True)
     return state
 
 

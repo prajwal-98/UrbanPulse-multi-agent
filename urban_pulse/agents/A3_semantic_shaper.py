@@ -15,6 +15,7 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     - Clean filtering
     - Hybrid theme detection (rule + LLM fallback)
     """
+    print("[PIPELINE] A3 starting...", flush=True)
 
     df = state.get("filtered_df")
 
@@ -135,7 +136,7 @@ def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 4
-
+    print("[PIPELINE] A3 complete.", flush=True)
     return state
 
 

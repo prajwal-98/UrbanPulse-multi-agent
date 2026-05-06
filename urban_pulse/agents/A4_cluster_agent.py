@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
+import scipy.cluster.vq as vq
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import KMeans
 from core.schema import UrbanPulseState
 from utils.llm_client import generate_response
 from agents.A4_cluster_helpers import _extract_keywords, _fallback_name, _calculate_trend
@@ -12,11 +12,12 @@ def cluster_agent_node(state: UrbanPulseState) -> UrbanPulseState:
     Step 4 — Pattern Detection (A4)
 
     Fully dynamic:
-    - Clustering (TF-IDF + KMeans)
+    - Clustering (TF-IDF + scipy kmeans2, no joblib dependency)
     - LLM-based cluster naming
     - LLM-based characteristics
     - Trend calculation (if date exists)
     """
+    print("[PIPELINE] A4 starting...", flush=True)
 
     df = state.get("filtered_df")
     reasoning_steps = []
@@ -26,21 +27,20 @@ def cluster_agent_node(state: UrbanPulseState) -> UrbanPulseState:
     # -------------------------------
     if df is None or df.empty:
         state["A4_output"] = {
-        "summary": "Not enough data for clustering",
-        "clusters": [],
-        "meta_insight": "Insufficient data"
-    }
+            "summary": "Not enough data for clustering",
+            "clusters": [],
+            "meta_insight": "Insufficient data"
+        }
         state["A4_reasoning"] = "No data available"
         return state
 
     reviews = df["raw_text"].fillna("").astype(str).tolist()
-    print("reviews: ", reviews)
     if len(reviews) < 5:
         state["A4_output"] = {
-        "summary": "Not enough data for clustering",
-        "clusters": [],
-        "meta_insight": "Insufficient data"
-    }
+            "summary": "Not enough data for clustering",
+            "clusters": [],
+            "meta_insight": "Insufficient data"
+        }
         state["A4_reasoning"] = "Not enough data"
         return state
 
@@ -58,11 +58,12 @@ def cluster_agent_node(state: UrbanPulseState) -> UrbanPulseState:
         X = tfidf.fit_transform(reviews)
 
         # -------------------------------
-        # 3. KMEANS
+        # 3. CLUSTERING (scipy kmeans2 — no joblib/subprocess dependency)
         # -------------------------------
-        k = 3
-        kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
-        labels = kmeans.fit_predict(X)
+        k = min(3, len(reviews))
+        X_dense = X.toarray().astype(float)
+        np.random.seed(42)
+        _, labels = vq.kmeans2(X_dense, k, iter=10, minit="points")
 
         df_clustered = df.copy()
         df_clustered["cluster"] = labels
@@ -96,7 +97,7 @@ Return a JSON array of {len(cluster_data)} objects only:
 [{{"name": "2-3 word name", "description": "1 line summary"}}]"""
 
         try:
-            batch_output = generate_response(batch_prompt, state)
+            batch_output = generate_response(batch_prompt, state, parse_json=True)
             if not isinstance(batch_output, list) or len(batch_output) != len(cluster_data):
                 batch_output = [{}] * len(cluster_data)
         except:
@@ -142,16 +143,14 @@ Return a JSON array of {len(cluster_data)} objects only:
             "clusters": clusters_output,
             "meta_insight": meta_insight.strip()
         }
-        print("A4_output: ", state["A4_output"])
-        print("A4_reasoning: ", state["A4_reasoning"])
         reasoning_steps.append("Dynamic clustering + LLM enrichment complete")
 
     except Exception as e:
         state["A4_output"] = {
-        "summary": "Not enough data for clustering",
-        "clusters": [],
-        "meta_insight": "Insufficient data"
-    }
+            "summary": "Not enough data for clustering",
+            "clusters": [],
+            "meta_insight": "Insufficient data"
+        }
         reasoning_steps.append(f"Error: {str(e)}")
 
     # -------------------------------
@@ -165,6 +164,5 @@ Return a JSON array of {len(cluster_data)} objects only:
 
     state["completed_steps"] = steps
     state["current_step"] = 5
-
+    print("[PIPELINE] A4 complete.", flush=True)
     return state
-

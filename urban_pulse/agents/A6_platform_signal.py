@@ -13,6 +13,7 @@ def platform_signal_node(state: UrbanPulseState) -> UrbanPulseState:
     - City
     - Time
     """
+    print("[PIPELINE] A6 starting...", flush=True)
 
     df = state.get("filtered_df")
     reasoning_steps = []
@@ -146,5 +147,5 @@ def platform_signal_node(state: UrbanPulseState) -> UrbanPulseState:
 
     state["completed_steps"] = steps
     state["current_step"] = 7
-
+    print("[PIPELINE] A6 complete.", flush=True)
     return state
