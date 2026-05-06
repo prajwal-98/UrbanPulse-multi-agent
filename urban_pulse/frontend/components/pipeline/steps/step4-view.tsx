@@ -241,15 +241,14 @@ export default function Step4View({ data }: { data: any }) {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-            Semantic Mapping
+            Back To Sematic Mapping
           </button>
         </Link>
         <Link href="/step-5">
           <button
             type="button"
-            className="w-full py-3 rounded-xl text-sm font-bold border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
-          >
-            Escalation Analysis
+            className="w-full py-3 rounded-xl text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">          
+            Proceed to Escalation Analysis
             <svg
               className="w-4 h-4"
               fill="none"
