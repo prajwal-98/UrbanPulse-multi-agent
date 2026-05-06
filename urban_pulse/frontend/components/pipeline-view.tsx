@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/contexts/session-context";
+import PipelineStatusBar from "@/components/pipeline/pipeline-status-bar";
 import Step1View from "@/components/step1-view";
 import Step2View from "./pipeline/steps/step2-view";
 import Step3View from "./pipeline/steps/step3-view";
@@ -16,54 +17,14 @@ import { NoData } from "./pipeline/pipeline-shared-ui";
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 const STEPS = [
-  {
-    num: 1, agent: "A1", href: "/step-1",
-    label: "Gatekeeper",
-    activeMsg: "Preparing your data…",
-    doneMsg: "Data prepared",
-  },
-  {
-    num: 2, agent: "A2", href: "/step-2",
-    label: "Context Intelligence",
-    activeMsg: "Understanding the context…",
-    doneMsg: "Context understood",
-  },
-  {
-    num: 3, agent: "A3", href: "/step-3",
-    label: "Semantic Mapping",
-    activeMsg: "Mapping issues in the data…",
-    doneMsg: "Issues mapped",
-  },
-  {
-    num: 4, agent: "A4", href: "/step-4",
-    label: "Finding Patterns",
-    activeMsg: "Finding patterns and clusters…",
-    doneMsg: "Patterns identified",
-  },
-  {
-    num: 5, agent: "A5", href: "/step-5",
-    label: "Escalation Analysis",
-    activeMsg: "Analysing escalation signals…",
-    doneMsg: "Escalations analysed",
-  },
-  {
-    num: 6, agent: "A6", href: "/step-6",
-    label: "Platform Comparing",
-    activeMsg: "Reading platform signals…",
-    doneMsg: "Platform signals captured",
-  },
-  {
-    num: 7, agent: "A7", href: "/step-7",
-    label: "Language Intelligence",
-    activeMsg: "Scoring and ranking insights…",
-    doneMsg: "Insights scored",
-  },
-  {
-    num: 8, agent: "A8", href: "/dashboard",
-    label: "Intelligence Reporting",
-    activeMsg: "Generating final intelligence…",
-    doneMsg: "Intelligence ready",
-  },
+  { num: 1, agent: "A1", href: "/step-1", short: "Gate",     label: "Gatekeeper",            activeMsg: "Preparing your data…",            doneMsg: "Data prepared"           },
+  { num: 2, agent: "A2", href: "/step-2", short: "Context",  label: "Context Intelligence",   activeMsg: "Understanding the context…",       doneMsg: "Context understood"      },
+  { num: 3, agent: "A3", href: "/step-3", short: "Semantic", label: "Semantic Mapping",        activeMsg: "Mapping issues in the data…",      doneMsg: "Issues mapped"           },
+  { num: 4, agent: "A4", href: "/step-4", short: "Patterns", label: "Finding Patterns",        activeMsg: "Finding patterns and clusters…",   doneMsg: "Patterns identified"     },
+  { num: 5, agent: "A5", href: "/step-5", short: "Escalate", label: "Escalation Analysis",     activeMsg: "Analysing escalation signals…",    doneMsg: "Escalations analysed"    },
+  { num: 6, agent: "A6", href: "/step-6", short: "Platform", label: "Platform Comparing",      activeMsg: "Reading platform signals…",        doneMsg: "Platform signals captured"},
+  { num: 7, agent: "A7", href: "/step-7", short: "Language", label: "Language Intelligence",   activeMsg: "Scoring and ranking insights…",    doneMsg: "Insights scored"         },
+  { num: 8, agent: "A8", href: "/dashboard", short: "Report",label: "Intelligence Reporting",  activeMsg: "Generating final intelligence…",   doneMsg: "Intelligence ready"      },
 ];
 
 export default function PipelineView({ stepNum }: { stepNum: number }) {
@@ -74,6 +35,15 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
 
   const isComplete = session.pipelineStatus === "complete";
   const isIdle     = session.pipelineStatus === "idle";
+  const isError    = session.pipelineStatus === "error";
+
+  const currentStepNum = session.currentStep ?? 0;
+  const visitedSteps = new Set<number>(
+    Object.entries(session.stepStatus ?? {})
+      .filter(([, v]) => v === "done")
+      .map(([k]) => parseInt(k.replace("A", "")))
+  );
+  const localProgress = session.progress ?? 0;
 
   useEffect(() => {
     if (!session.sessionId || stepNum === 8 || isIdle || (!isComplete && session.pipelineStatus !== "complete")) return;
@@ -96,135 +66,34 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
 
   const canNavigate = () => !isIdle;
 
-  /* ─── Pipeline progress strip ───────────────────── */
-  function StepNode({ s }: { s: (typeof STEPS)[number] }) {
-    const visited = session.stepStatus?.[s.agent] === "done" || session.pipelineStatus === "complete";
-    const viewing = s.num === stepNum;
-    const navigable = canNavigate();
-
-    const dot = (
-      <div
-        className={`
-          relative w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all
-          ${visited  ? "bg-emerald-500 text-white"
-          : viewing  ? "bg-amber-500 text-white ring-4 ring-amber-100"
-          : "bg-amber-400 text-white"}
-          ${navigable && !viewing ? "cursor-pointer hover:opacity-80" : ""}
-        `}
-      >
-        {visited ? (
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        ) : (
-          <span>{s.num}</span>
-        )}
-      </div>
-    );
-
-    const label = (
-      <span className={`text-[10px] font-medium mt-1.5 text-center leading-tight max-w-[72px] block
-        ${visited ? "text-emerald-600" : viewing ? "text-amber-700 font-semibold" : "text-amber-600"}`}
-      >
-        {s.label}
-      </span>
-    );
-
-    const node = (
-      <div className="flex flex-col items-center gap-0">
-        {dot}
-        {label}
-      </div>
-    );
-
-    return navigable
-      ? (
-        <Link
-          href={s.href}
-          className="flex flex-col items-center"
-          onClick={() => session.currentStep = s.num}
-        >
-          {node}
-        </Link>
-      )
-      : node;
-  }
-
   /* ─── Render ────────────────────────────────────── */
   return (
     <div className="min-h-screen bg-slate-50">
 
-      {/* ── Page header ── */}
-      <div className="bg-white border-b border-slate-200 px-8 py-5">
-        <div className="max-w-7xl mx-auto px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
-            Step {stepNum} of {STEPS.length} · Analysis Pipeline
+        <div className="max-w-7xl mx-auto px-7 pt-1 pb-10 space-y-6">
+        <PipelineStatusBar
+            steps={STEPS}
+            isIdle={isIdle}
+            isComplete={isComplete}
+            isError={isError}
+            localProgress={localProgress}
+            visitedSteps={visitedSteps}
+            viewingStep={stepNum}
+            currentStepNum={currentStepNum}
+            onClickStep={(n) => router.push(STEPS[n - 1].href)}
+          />
+
+        {/* ── Agent header ── */}
+        <div className="px-2 py-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-1">
+            {thisStep.agent} · Step {stepNum} of {STEPS.length}
           </p>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
             {stepNum === 1 ? "Validating Data — Gatekeeper" : thisStep.label}
           </h1>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-8 py-10 space-y-6">
-
-        {/* ── Pipeline progress strip ── */}
-        <div className="bg-white rounded-2xl border border-slate-200 px-6 pt-6 pb-5">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-5">
-            Pipeline Progress
-          </p>
-
-          {/* Nodes + connecting lines with prev/next buttons */}
-          <div className="flex items-center justify-center gap-4">
-            {/* Prev button */}
-            <button
-              onClick={() => router.push(STEPS[stepNum - 2].href)}
-              disabled={stepNum === 1}
-              title="Previous agent"
-              className={`flex-shrink-0 w-9 h-9 rounded-full border border-slate-200 bg-white shadow-sm flex items-center justify-center transition-all ${
-                stepNum === 1
-                  ? "opacity-30 cursor-not-allowed pointer-events-none"
-                  : "hover:bg-slate-50 hover:border-slate-300 hover:shadow"
-              }`}
-            >
-              <svg className="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            {/* Dots */}
-            <div className="flex items-start overflow-x-auto pb-2">
-              {STEPS.map((s, i) => {
-                const visited = session.stepStatus?.[s.agent] === "done" || session.pipelineStatus === "complete";
-                return (
-                  <div key={s.agent} className="flex items-start shrink-0">
-                    <StepNode s={s} />
-                    {i < STEPS.length - 1 && (
-                      <div className={`h-px w-6 mt-4 mx-0.5 shrink-0 transition-colors ${visited ? "bg-emerald-300" : "bg-amber-200"}`} />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Next button */}
-            <button
-              onClick={() => router.push(STEPS[stepNum].href)}
-              disabled={stepNum === 8}
-              title="Next agent"
-              className={`flex-shrink-0 w-9 h-9 rounded-full border border-slate-200 bg-white shadow-sm flex items-center justify-center transition-all ${
-                stepNum === 8
-                  ? "opacity-30 cursor-not-allowed pointer-events-none"
-                  : "hover:bg-slate-50 hover:border-slate-300 hover:shadow"
-              }`}
-            >
-              <svg className="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-
-        </div>
+        {/* ── Status card ── */}
 
         {/* ── Status card ── */}
         {isIdle ? (
