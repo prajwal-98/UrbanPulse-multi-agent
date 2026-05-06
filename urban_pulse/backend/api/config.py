@@ -11,6 +11,8 @@ DEMO_DATA_PATH = BASE_DIR / "data" / "demo" / "demo_source.csv"
 CORS_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://*.vercel.app",
+    "*",  # remove this after you get the exact Vercel URL
 ]
 
 AVAILABLE_MODELS = [

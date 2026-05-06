@@ -8,7 +8,7 @@ def build_metrics(df):
         "late|delay|bad|missing|slow|rude", case=False, regex=True
     ).sum()
 
-    negative_pct = round((negative_count / total_reviews) * 100, 1) if total_reviews else 0
+    negative_pct = float(round((negative_count / total_reviews) * 100, 1)) if total_reviews else 0.0
 
     top_brand = None
     if "brand" in df.columns:
