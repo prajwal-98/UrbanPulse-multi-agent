@@ -1,19 +1,24 @@
 # --- Environment & Keys ---
 .env
+.env.local
+.env.*.local
+
+# --- Virtual Environments ---
 taxoflow_venv/
+venv_urbanpulse/
+
+# --- Python ---
 __pycache__/
 *.py[cod]
+*.pyc
 
 # --- Data & Junk ---
 data/
 .DS_Store
-Untitled*       
+Untitled*
+
+# --- Node ---
 node_modules/
-venv_urbanpulse/
-.env
-node_modules/
-__pycache__/
-*.pyc
 .next/
 
 # --- IDE & Tooling ---
@@ -21,34 +26,20 @@ __pycache__/
 .idea/
 .cursor/
 
-__pycache__/
-*.pyc
-
 # --- Test files ---
 test_agent.py
-generate_manifest.py
-D:\UrbanPulse-multi-agent\urban_pulse\uploads
-D:\UrbanPulse-multi-agent\urban_pulse\frontend\tsconfig.tsbuildinfo
-D:\UrbanPulse-multi-agent\snapshot_run.log
-D:\UrbanPulse-multi-agent\test_api.py
-D:\UrbanPulse-multi-agent\list_nodels.py
-
-
-# Dev files
-test1.py
 test_api.py
+test1.py
 list_nodels.py
-snapshot_run.log
-list_nodels.py
+generate_manifest.py
+
+# --- Dev/Internal files ---
 .claude-instructions.md
 .claudeignore
 .claude/
-
-# Uploads
-uploads/
-
-# Logs
-*.log
-
-# Build info
+snapshot_run.log
 tsconfig.tsbuildinfo
+
+# --- Uploads & Logs ---
+uploads/
+*.log
