@@ -241,7 +241,7 @@ export default function Step4View({ data }: { data: any }) {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-            Back To Sematic Mapping
+            Back To Semantic Mapping
           </button>
         </Link>
         <Link href="/step-5">

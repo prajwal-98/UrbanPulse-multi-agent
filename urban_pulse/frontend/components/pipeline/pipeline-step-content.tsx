@@ -2,7 +2,7 @@
 
 import React, { useState, Dispatch, SetStateAction } from "react";
 import Link from "next/link";
-import Step1View from "@/components/step1-view";
+import Step1View from "@/components/pipeline/steps/step1-view";
 import { NoData, SectionTitle, PriorityBadge } from "./pipeline-shared-ui";
 import Step2View from "./steps/step2-view";
 import Step3View from "./steps/step3-view";

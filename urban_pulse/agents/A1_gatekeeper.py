@@ -196,11 +196,14 @@ def gatekeeper_node(state: UrbanPulseState) -> UrbanPulseState:
             "peak_month": str(df["date"].dt.to_period("M").mode()[0]) if "date" in df.columns else None,
         }
 
+        required_cols = [c for c in ["raw_text", "star_rating", "city", "platform"] if c in df.columns]
+        _null_rate = df[required_cols].isnull().mean().mean() if required_cols else 0.0
+
         state["A1_data_quality"] = {
             "schema_valid": True,
-            "missing_data_ok": not df.isnull().any().any(),
+            "missing_data_ok": _null_rate < 0.2,
             "format_valid": True,
-            "null_rate": round(float(df.isnull().mean().mean()) * 100, 1),
+            "null_rate": round(float(_null_rate) * 100, 1),
         }
 
         state["A1_sample"] = df.head(10)

@@ -181,7 +181,7 @@ export default function Step6View({ data }: { data: any }) {
       )},
       {/* Navigation buttons */}
       <div className="grid grid-cols-2 gap-3 pt-2">
-        <Link href="/step-4">
+        <Link href="/step-5">
           <button
             type="button"
             className="w-full py-3 rounded-xl text-sm font-bold border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
@@ -189,10 +189,10 @@ export default function Step6View({ data }: { data: any }) {
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-            Back to Platform Comparison
+            Back to Escalation Analysis
           </button>
         </Link>
-        <Link href="/step-6">
+        <Link href="/step-7">
           <button
             type="button"
             className="w-full py-3 rounded-xl text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"

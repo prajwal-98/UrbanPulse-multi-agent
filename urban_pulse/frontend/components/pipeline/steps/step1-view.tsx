@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, DonutChart, LineChart, RatingChart } from "@/components/steps/step1-charts";
+import { BarChart, DonutChart, LineChart, RatingChart } from "@/components/pipeline/steps/step1-charts";
 
 interface Step1ViewProps {
   data: any;
@@ -33,7 +33,7 @@ function QualityChecks({ quality }: { quality: Record<string, any> }) {
         {qualityChecks.map(({ label, pass }) => {
           const isPassed = pass === true;
           const isFailed = pass === false;
-          const nullRate = label === "No major missing values" && quality.null_rate ? ` · ${(quality.null_rate * 100).toFixed(1)}% null` : "";
+          const nullRate = label === "No major missing values" && quality.null_rate ? ` · ${quality.null_rate.toFixed(1)}% null` : "";
           const statusText = isPassed ? "Passed" : isFailed ? "Failed" : "Unknown";
 
           const statusPill = isPassed
@@ -468,7 +468,7 @@ export default function Step1View({ data, onContinue }: Step1ViewProps) {
           {isValid && onContinue && (
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
           )}
-          <span className="relative">Proceed to A2 — Context Intelligence</span>
+          <span className="relative">Proceed to Context Intelligence </span>
           {isValid && onContinue && (
             <svg className="relative w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

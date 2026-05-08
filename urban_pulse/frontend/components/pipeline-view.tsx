@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/contexts/session-context";
 import PipelineStatusBar from "@/components/pipeline/pipeline-status-bar";
-import Step1View from "@/components/step1-view";
+import Step1View from "@/components/pipeline/steps/step1-view";
 import Step2View from "./pipeline/steps/step2-view";
 import Step3View from "./pipeline/steps/step3-view";
 import Step4View from "./pipeline/steps/step4-view";

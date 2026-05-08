@@ -33,7 +33,7 @@ function FilterGroup({
 
   const summary =
     selected.length === 0
-      ? `All ${label}s`
+      ? `All ${label}(s)`
       : selected.length === 1
       ? selected[0]
       : `${selected.length} selected`;

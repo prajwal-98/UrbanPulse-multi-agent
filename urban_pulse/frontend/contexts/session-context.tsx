@@ -20,6 +20,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const savedSessionId = localStorage.getItem("session_id");
     const savedFilterOptionsRaw = localStorage.getItem("sample_filter_options");
     const savedFilterOptions = savedFilterOptionsRaw ? JSON.parse(savedFilterOptionsRaw) : null;
+    const savedDemoFilterOptionsRaw = localStorage.getItem("demo_filter_options");
+    const savedDemoFilterOptions = savedDemoFilterOptionsRaw ? JSON.parse(savedDemoFilterOptionsRaw) : null;
     if (mode === "demo" && savedUploadStatus === "ready") {
       return {
         ...defaultState,
@@ -27,6 +29,16 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         uploadStatus: "ready",
         filename: "demo_dataset.csv",
         sessionId: savedSessionId,
+        ...(savedDemoFilterOptions && {
+          filterOptions: {
+            cities: savedDemoFilterOptions.cities ?? [],
+            platforms: savedDemoFilterOptions.platforms ?? [],
+            categories: savedDemoFilterOptions.categories ?? [],
+            dateMin: savedDemoFilterOptions.date_min ?? null,
+            dateMax: savedDemoFilterOptions.date_max ?? null,
+            totalRows: savedDemoFilterOptions.total_rows ?? 0,
+          },
+        }),
       };
     }
     if (mode === "sample_demo" && savedUploadStatus === "ready") {

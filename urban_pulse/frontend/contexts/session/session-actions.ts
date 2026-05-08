@@ -122,6 +122,7 @@ export function createSessionActions(
       applyUploadResponse(data);
       localStorage.setItem("session_mode", "demo");
       localStorage.setItem("session_upload_status", "ready");
+      localStorage.setItem("demo_filter_options", JSON.stringify(data.filter_options));
     } catch (e: unknown) {
       patch({ uploadStatus: "error", error: (e as Error).message });
     }
