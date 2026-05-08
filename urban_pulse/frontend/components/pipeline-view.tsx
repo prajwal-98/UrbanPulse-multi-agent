@@ -27,15 +27,17 @@ const STEPS = [
   { num: 8, agent: "A8", href: "/dashboard", short: "Report",label: "Intelligence Reporting",  activeMsg: "Generating final intelligence…",   doneMsg: "Intelligence ready"      },
 ];
 
+
 export default function PipelineView({ stepNum }: { stepNum: number }) {
   const router = useRouter();
   const session = useSession();
-  const [stepData, setStepData] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-
   const isComplete = session.pipelineStatus === "complete";
   const isIdle     = session.pipelineStatus === "idle";
   const isError    = session.pipelineStatus === "error";
+
+  const [stepData, setStepData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  
 
   const currentStepNum = session.currentStep ?? 0;
   const visitedSteps = new Set<number>(
@@ -92,8 +94,6 @@ export default function PipelineView({ stepNum }: { stepNum: number }) {
             {stepNum === 1 ? "Validating Data — Gatekeeper" : thisStep.label}
           </h1>
         </div>
-
-        {/* ── Status card ── */}
 
         {/* ── Status card ── */}
         {isIdle ? (

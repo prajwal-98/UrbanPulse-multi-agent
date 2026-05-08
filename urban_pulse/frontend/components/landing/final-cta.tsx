@@ -42,10 +42,10 @@ export default function FinalCta() {
         {/* CTAs */}
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/step-1"
+            href="/landing"
             className="group flex items-center gap-2.5 px-8 py-4 rounded-xl bg-white text-slate-900 text-sm font-bold hover:bg-slate-100 transition-colors shadow-sm"
           >
-            Start Analysis
+            Get Started
             <svg
               className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform"
               fill="none"

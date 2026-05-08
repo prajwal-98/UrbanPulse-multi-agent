@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSession } from "@/contexts/session-context";
 import { usePipelinePoller } from "@/components/pipeline/use-pipeline-poller";
@@ -19,6 +20,76 @@ const STEPS = [
   { num: 8, label: "Intelligence Reporting",activeMsg: "Generating final intelligence…",       doneMsg: "Intelligence ready"      },
 ] as const;
 
+function CompletionModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="h-1 w-full bg-gradient-to-r from-emerald-500 to-emerald-400" />
+        <div className="px-6 pt-6 pb-7">
+          <div className="flex flex-col items-center text-center mb-6">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-4">
+              <svg className="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h2 className="text-lg font-bold text-slate-900 tracking-tight">All Agents Complete</h2>
+            <p className="text-xs text-slate-400 mt-1.5 leading-relaxed max-w-xs">
+              All 8 agents have finished processing. What would you like to do next?
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <Link href="/step-1" onClick={onClose}>
+              <button type="button" className="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all duration-150 group text-left">
+                <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-slate-200 transition-colors">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} style={{width:18,height:18}} className="text-slate-600">
+                    <circle cx="5" cy="6" r="2" /><circle cx="5" cy="18" r="2" /><circle cx="19" cy="12" r="2" />
+                    <path strokeLinecap="round" d="M7 6h4l6 6-6 6H7" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-slate-800 leading-none mb-0.5">Analyse Agent Workflow</p>
+                  <p className="text-[11px] text-slate-400">Review each agent's step-by-step output</p>
+                </div>
+                <svg className="w-4 h-4 text-slate-300 ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </Link>
+
+            <Link href="/dashboard" onClick={onClose}>
+              <button type="button" className="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 shadow-sm hover:shadow-md transition-all duration-150 group text-left">
+                <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} style={{width:18,height:18}} className="text-white">
+                    <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 17.5h7M17.5 14v7" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-white leading-none mb-0.5">View Agents Report</p>
+                  <p className="text-[11px] text-white/60">Full executive intelligence dashboard</p>
+                </div>
+                <svg className="w-4 h-4 text-white/50 ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </Link>
+          </div>
+
+          <button type="button" onClick={onClose} className="w-full mt-3 py-2 text-xs text-slate-400 hover:text-slate-600 transition-colors">
+            Dismiss
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PipelineScreen() {
   const { sessionId, pipelineStatus } = useSession();
   const isIdle = pipelineStatus === "idle";
@@ -36,7 +107,14 @@ export default function PipelineScreen() {
   const [reloadKey, setReloadKey]         = useState(0);
 
   const prevIsComplete = useRef(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
   const prevIsRunning  = useRef(false);
+  useEffect(() => {
+  if (isComplete && !prevIsComplete.current) {
+      prevIsComplete.current = true;
+      setShowCompletionModal(true);
+    }
+  }, [isComplete]);
   const stepDataRef    = useRef<Record<number, any>>({});
   stepDataRef.current  = stepData;
 
@@ -173,6 +251,9 @@ export default function PipelineScreen() {
         )}
 
       </div>
+      {showCompletionModal && (
+        <CompletionModal onClose={() => setShowCompletionModal(false)} />
+      )}
     </div>
   );
 }

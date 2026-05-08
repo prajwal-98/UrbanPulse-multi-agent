@@ -1,10 +1,11 @@
+import json
 import uuid
 import pandas as pd
 from pathlib import Path
 from typing import Optional
 from datetime import datetime
 
-from ..config import UPLOAD_DIR, DEMO_DATA_PATH
+from ..config import UPLOAD_DIR, DEMO_DATA_PATH, SAMPLE_DEMO_DATA_PATH, SAMPLE_DEMO_STATE_PATH
 from ..schemas.response_models import FilterOptions
 
 # In-memory session store: session_id -> { df, filename, mode, state, status, progress }
@@ -139,10 +140,36 @@ async def load_demo_session() -> tuple[str, pd.DataFrame, FilterOptions]:
         "filename": "demo_dataset.csv",
         "mode": "demo",
         "state": snapshot,
-        "status": "complete" if snapshot else "pending",
-        "progress": 100 if snapshot else 0,
-        "current_step": "A8" if snapshot else None,
-        "step_status": {f"A{i}": "done" for i in range(1, 9)} if snapshot else {},
+        "status": "pending",
+        "progress": 0,
+        "current_step": None,
+        "step_status": {},
+        "error": None,
+    })
+    return session_id, df, filter_opts
+
+
+async def load_sample_demo_session() -> tuple[str, pd.DataFrame, FilterOptions]:
+    session_id = create_session()
+
+    df = pd.read_csv(SAMPLE_DEMO_DATA_PATH)
+    df = normalize_dataframe(df)
+    filter_opts = _extract_filter_options(df)
+
+    state = None
+    if SAMPLE_DEMO_STATE_PATH.exists():
+        raw = json.loads(SAMPLE_DEMO_STATE_PATH.read_text())
+        state = raw if raw else None
+
+    set_session(session_id, {
+        "df": df,
+        "filename": "sample_dataset.csv",
+        "mode": "sample_demo",
+        "state": state,
+        "status": "pending",
+        "progress": 0,
+        "current_step": None,
+        "step_status": {},
         "error": None,
     })
     return session_id, df, filter_opts

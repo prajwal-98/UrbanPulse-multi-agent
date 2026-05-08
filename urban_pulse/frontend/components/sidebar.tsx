@@ -16,12 +16,12 @@ export default function Sidebar() {
   const canRun =
     session.uploadStatus === "ready" &&
     session.pipelineStatus === "idle" &&
-    (session.mode === "demo" || Boolean(session.apiKey));
+    (session.mode === "demo" || session.mode === "sample_demo" || Boolean(session.apiKey));
 
   const handleRunAnalysis = () => {
     setCollapsed(true);
     session.runAnalysis();
-    router.push("/step-1");
+    router.push("/landing");
   };
 
   /* ── status dot ── */
@@ -200,7 +200,7 @@ export default function Sidebar() {
             >
               {session.mode === "live" && !session.apiKey
                 ? "Enter API key to run"
-                : "Start Analysis →"}
+                : "Run Analysis →"}
             </button>
             {canRun && (
               <p className="text-[10px] text-slate-400 text-center mt-1.5">

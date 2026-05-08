@@ -121,7 +121,7 @@ function StepPill({ step, status, isViewing, isClickable, onClickStep }: StepPil
               inset: -6,
               borderRadius: "50%",
               border: `2px solid ${color.border}`,
-              animation: "up-pulse-ring 1.5s ease-out infinite",
+              animation: "up-pulse-ring 1s ease-out infinite",
             }}
           />
         )}
@@ -287,19 +287,19 @@ export default function PipelineStatusBar({
         <div style={{ padding: "0 24px" }}>
           <div
             style={{
-              display: "flex",
+              display: "grid",
+              gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center",
-              gap: 16,
               padding: "14px 0 10px",
             }}
           >
             {/* Left: brand mark + status */}
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: 12,
-                flexShrink: 0,
               }}
             >
               <div
@@ -356,14 +356,13 @@ export default function PipelineStatusBar({
                 height: 32,
                 background: "#e2e8f0",
                 flexShrink: 0,
-                marginLeft: 4,
               }}
             />
+            </div>{/* end left cell */}
 
             {/* Step pills — horizontally scrollable */}
             <div
               style={{
-                flex: 1,
                 overflowX: "auto",
                 paddingBottom: 2,
                 // hide scrollbar visually
@@ -409,7 +408,7 @@ export default function PipelineStatusBar({
                   display: "flex",
                   alignItems: "center",
                   gap: 8,
-                  marginLeft: 4,
+                  marginLeft: "auto",
                 }}
               >
                 <div
@@ -431,7 +430,7 @@ export default function PipelineStatusBar({
                         borderRadius: "50%",
                         background: "#d97706",
                         display: "block",
-                        animation: "up-pulse-ring 1.5s ease-out infinite",
+                        animation: "up-pulse-ring 1s ease-out infinite",
                       }}
                     />
                   )}
@@ -539,7 +538,7 @@ export default function PipelineStatusBar({
                         }}
                       >
                         {isViewingActive && (
-                          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#d97706", display: "block", animation: "up-pulse-ring 1.2s ease infinite" }}/>
+                          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#d97706", display: "block", animation: "up-pulse-ring 1s ease infinite" }}/>
                         )}
                         <span style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: 10, fontWeight: 700, color: tc }}>
                           {cur?.agent ?? `A${cur?.num}`}

@@ -38,7 +38,7 @@ export default function LandingPage() {
               Dashboard
             </a>
             <a
-              href="/step-1"
+              href="/landing"
               className="px-4 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-700 transition-colors"
             >
               Start Analysis

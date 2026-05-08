@@ -1,6 +1,29 @@
-import Link from "next/link";
+"use client";
+
+import { useRouter } from "next/navigation";
+
+const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export default function HeroSection() {
+  const router = useRouter();
+
+  const handleStartAnalysis = () => {
+    localStorage.removeItem("session_mode");
+    localStorage.removeItem("session_upload_status");
+    localStorage.removeItem("session_id");
+    router.push("/landing");
+  };
+
+  const handleSampleDemo = async () => {
+    const res = await fetch(`${BACKEND}/upload/sample-demo`, { method: "POST" });
+    if (!res.ok) return;
+    const data = await res.json();
+    localStorage.setItem("session_id", data.session_id);
+    localStorage.setItem("session_mode", "sample_demo");
+    localStorage.setItem("session_upload_status", "ready");
+    localStorage.setItem("sample_filter_options", JSON.stringify(data.filter_options));
+    router.push("/landing");
+  };
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white">
       {/* Dot grid background */}
@@ -56,11 +79,11 @@ export default function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-wrap items-center gap-4 mb-16">
-          <Link
-            href="/step-1"
+          <button
+            onClick={handleStartAnalysis}
             className="group flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 transition-colors shadow-sm"
           >
-            Start Analysis
+            Get Started
             <svg
               className="w-4 h-4 text-slate-400 group-hover:text-slate-300 group-hover:translate-x-0.5 transition-all"
               fill="none"
@@ -70,13 +93,13 @@ export default function HeroSection() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
-          <Link
-            href="/dashboard"
+          </button>
+          <button
+            onClick={handleSampleDemo}
             className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors"
           >
-            View Final Dashboard
-          </Link>
+            Try Demo
+          </button>
         </div>
 
         {/* Stats strip */}

@@ -1,6 +1,6 @@
 /* ─── Types ──────────────────────────────────────────────────────────── */
 
-export type Mode = "demo" | "live";
+export type Mode = "demo" | "live" | "sample_demo";
 export type UploadStatus = "idle" | "uploading" | "ready" | "error";
 export type PipelineStatus = "idle" | "running" | "complete" | "error";
 
@@ -45,6 +45,7 @@ export interface SessionContextValue extends SessionState {
   setFilters: (partial: Partial<Filters>) => void;
   uploadFile: (file: File) => Promise<void>;
   useDemo: () => Promise<void>;
+  trySampleDemo: () => Promise<void>;
   runAnalysis: () => Promise<void>;
   addVisitedStep: (step: number) => void;
   reset: () => void;
@@ -70,7 +71,7 @@ export const defaultFilters: Filters = {
 };
 
 export const defaultState: SessionState = {
-  mode: "demo",
+  mode: "live",
   apiKey: "",
   model: "gemini-3.1-flash-lite-preview",
   sessionId: null,

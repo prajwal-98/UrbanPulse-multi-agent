@@ -101,3 +101,11 @@ def load_snapshot() -> dict | None:
         return None
     with open(snapshot_path, "r") as f:
         return json.load(f)
+
+
+def load_sample_snapshot() -> dict | None:
+    from ..config import SAMPLE_DEMO_STATE_PATH
+    if not SAMPLE_DEMO_STATE_PATH.exists():
+        return None
+    raw = SAMPLE_DEMO_STATE_PATH.read_text()
+    return json.loads(raw) if raw else None

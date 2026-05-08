@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import type { Mode, UploadStatus } from "@/contexts/session-context";
 
 const MODELS = [
@@ -37,6 +38,8 @@ interface Props {
 
 export default function SidebarUploadPanel({ session }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const isSampleDemo = session.mode === "sample_demo";
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -49,12 +52,20 @@ export default function SidebarUploadPanel({ session }: Props) {
       {/* ── MODE TOGGLE ──────────────────────── */}
       <div className="mb-5">
         <SectionLabel>Mode</SectionLabel>
-        <div className="flex gap-0.5 p-1 bg-slate-100 rounded-xl">
-          {(["demo", "live"] as const).map((m) => (
+        <div className={`flex gap-0.5 p-1 bg-slate-100 rounded-xl ${isSampleDemo ? "opacity-40 pointer-events-none" : ""}`}>
+          {(["live", "demo"] as const).map((m) => (
             <button
               key={m}
               type="button"
-              onClick={() => session.setMode(m)}
+              onClick={() => {
+                if (m === "demo" && session.mode !== "demo") {
+                  session.setMode("demo");
+                  session.useDemo().then(() => router.push("/landing"));
+                } else if (m === "live") {
+                  session.setMode("live");
+                }
+              }}
+              disabled={isSampleDemo}
               className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all duration-150
                 ${
                   session.mode === m
@@ -62,15 +73,23 @@ export default function SidebarUploadPanel({ session }: Props) {
                     : "text-slate-500 hover:text-slate-700"
                 }`}
             >
-              {m === "demo" ? "Demo" : "Live API"}
+              {m === "demo" ? "Last Run" : "My Data"}
             </button>
           ))}
         </div>
-        {session.mode === "demo" && (
-          <p className="text-[10px] text-slate-400 mt-1.5 px-1">
-            No API key required · uses sample data
+        {isSampleDemo ? (
+          <p className="text-[10px] text-emerald-600 font-medium mt-1.5 px-1">
+            Sample Demo mode — using bundled dataset
           </p>
-        )}
+        ) : session.mode === "demo" ? (
+          <p className="text-[10px] text-slate-400 mt-1.5 px-1">
+            Replay your last analysis instantly
+          </p>
+        ) : session.mode === "live" ? (
+          <p className="text-[10px] text-slate-400 mt-1.5 px-1">
+            Upload your dataset and API key
+          </p>
+        ) : null}
       </div>
 
       {/* ── API CONFIGURATION (live only) ────── */}
@@ -147,7 +166,7 @@ export default function SidebarUploadPanel({ session }: Props) {
           </div>
         )}
 
-        {session.uploadStatus === "idle" && (
+        {session.uploadStatus === "idle" && !isSampleDemo && (
           <div className="space-y-2">
             {session.mode === "live" && (
               <>
@@ -173,21 +192,7 @@ export default function SidebarUploadPanel({ session }: Props) {
               </>
             )}
 
-            <button
-              type="button"
-              onClick={session.useDemo}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs font-medium transition-colors
-                ${
-                  session.mode === "demo"
-                    ? "bg-slate-900 text-white hover:bg-slate-800"
-                    : "border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300"
-                }`}
-            >
-              <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              {session.mode === "demo" ? "Load Demo Dataset" : "Use Demo Dataset"}
-            </button>
+
           </div>
         )}
 

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 
-from ..services.file_service import save_upload, load_demo_session
+from ..services.file_service import save_upload, load_demo_session, load_sample_demo_session, get_session, set_session
+from ..services.state_service import load_snapshot, load_sample_snapshot
 from ..schemas.response_models import UploadResponse
 from ..config import MAX_FILE_SIZE_MB
 
@@ -43,19 +44,50 @@ async def use_demo_dataset():
     """
     Load the built-in demo dataset. No file upload required.
     Use this to preview the full A1→A8 pipeline without real data.
+    Demo data is pre-computed with all agents complete.
     """
     try:
         session_id, _, filter_opts = await load_demo_session()
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to load demo data: {exc}")
 
-    from ..services.state_service import load_snapshot
-    has_snapshot = load_snapshot() is not None
+    snapshot = load_snapshot()
+    if snapshot:
+        session = get_session(session_id)
+        if session:
+            set_session(session_id, {**session, "state": snapshot})
+
     return UploadResponse(
         session_id=session_id,
         filename="demo_dataset.csv",
         total_rows=filter_opts.total_rows,
         filter_options=filter_opts,
         mode="demo",
-        pipeline_status="complete" if has_snapshot else "idle",
+        pipeline_status="idle",
+    )
+
+
+@router.post("/sample-demo", response_model=UploadResponse)
+async def use_sample_demo_dataset():
+    """
+    Load the sample demo dataset. Pipeline starts in pending state for frontend simulation.
+    """
+    try:
+        session_id, _, filter_opts = await load_sample_demo_session()
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Failed to load sample demo data: {exc}")
+
+    snapshot = load_sample_snapshot()
+    if snapshot:
+        session = get_session(session_id)
+        if session:
+            set_session(session_id, {**session, "state": snapshot})
+
+    return UploadResponse(
+        session_id=session_id,
+        filename="sample_dataset.csv",
+        total_rows=filter_opts.total_rows,
+        filter_options=filter_opts,
+        mode="sample_demo",
+        pipeline_status="idle",
     )
