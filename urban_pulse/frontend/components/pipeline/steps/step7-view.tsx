@@ -263,7 +263,7 @@ export default function Step7View({ data }: { data: any }) {
             Back to Platform Comparion
           </button>
         </Link>
-        <Link href="/step-8">
+        <Link href="/dashboard">
           <button
             type="button"
             className="w-full py-3 rounded-xl text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
