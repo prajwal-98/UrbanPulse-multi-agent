@@ -96,6 +96,12 @@ def save_snapshot(state: dict) -> None:
             return super().encode(obj)
 
         def _clean(self, obj):
+            try:
+                import numpy as np
+                if isinstance(obj, (np.floating, np.integer)):
+                    obj = obj.item()
+            except ImportError:
+                pass
             if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
                 return None
             if isinstance(obj, dict):
