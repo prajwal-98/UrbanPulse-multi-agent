@@ -13,10 +13,10 @@ __pycache__/
 *.pyc
 
 # --- Data & Junk ---
-data/uploads/
-data/processed/
-data/artifacts/
-data/raw/
+urban_pulse/data/uploads/
+urban_pulse/data/processed/
+urban_pulse/data/artifacts/
+urban_pulse/data/raw/
 .DS_Store
 Untitled*
 
