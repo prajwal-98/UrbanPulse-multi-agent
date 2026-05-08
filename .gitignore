@@ -36,6 +36,7 @@ test_api.py
 test1.py
 list_nodels.py
 generate_manifest.py
+generate_snapshot.py
 
 # --- Dev/Internal files ---
 .claude-instructions.md
