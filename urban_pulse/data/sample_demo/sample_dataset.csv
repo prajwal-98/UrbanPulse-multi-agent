@@ -1,0 +1,201 @@
+review_id,date,city,platform,category,brand,delivery_time,order_context,raw_text,star_rating,cart_value_inr,surge_fee_paid,x,y,z,cluster
+2d6a5e18-1b5c-4d8e-9f3a-7c2d9e1a0b3c,15/05/2025,Bangalore,Zepto,Ice Cream,Magnum,12,Silk Board Jam,Macha the delivery was sakkath fast despite Silk Board scene. Magnum was still frozen. Bombat service!,5,450,False
+f4b7c8d9-2a1b-4c3d-8e5f-6a7b8c9d0e1f,22/07/2025,Mumbai,Blinkit,Snacking,Maggi,48,Mumbai Monsoon,Bhai 48 mins for Maggi? Paid surge fee also and still waiting in this rain. Total kachra service platform is lagging.,1,210,True
+a1b2c3d4-e5f6-4a5b-9c8d-7e6f5d4c3b2a,10/08/2025,Mumbai,Swiggy Instamart,Ice Cream,Kwality Wall's,35,Mumbai Monsoon,Ice cream full melt ho gaya. Mumbai Monsoon is crazy but delivery took 35 mins. Paisa vasool nahi hua.,2,600,False
+d9e8f7a6-b5c4-4d3e-2f1a-0b9c8d7e6f5a,12/03/2025,Delhi,BigBasket Now,Snacking,Kurkure,15,IPL Finals,Systumm hang! 15 mins for Kurkure during the final match. Oye hoye swaad aa gaya.,5,320,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,04/11/2025,Pune,Zepto,Personal Care,Dove,55,Viman Nagar Student Party,Paid surge fee and waited 55 mins for a Dove soap? Kantaala aa gaya system is so slow.,2,180,True
+b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e,18/01/2025,Hyderabad,Blinkit,Home Care,Surf Excel,10,Gachibowli Power Cut,Hau delivery was kirak! Needed Surf Excel urgently because of power cut laundry pile. Zabardast speed.,5,550,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,25/06/2025,Bangalore,Swiggy Instamart,Snacking,Lays,60,Peak HSR Hour,Simply waste guru. 60 mins delivery and surge fee paid? Tech-park traffic is no excuse for this delay.,1,150,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,05/02/2025,Mumbai,Zepto,Personal Care,Pepsodent,9,Local Train Delay,Fatafat delivery at the station entrance. Pepsodent reached before my train. Ek number!,5,190,False
+a9b8c7d6-e5f4-4a3b-2c1d-0e9f8a7b6c5d,14/09/2025,Delhi,Blinkit,Home Care,Vim,42,Delhi Smog,Challan kat gaya delivery ka! 42 mins and surge fee? Bhai dimag kharab kar diya platform ne.,2,240,True
+b5c6d7e8-f9a0-4b1c-2d3e-4f5a6b7c8d9e,12/04/2025,Hyderabad,Swiggy Instamart,Snacking,Maggi,14,Late Night Biryani Supplement,Kya mazaak hai 14 mins only? Kirak service for my midnight Maggi cravings. Baigan speed!,5,280,False
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,20/08/2025,Mumbai,Blinkit,Ice Cream,Magnum,40,Mumbai Monsoon,Total melt scene. Mumbai Monsoon me Magnum shakes ban gaya in 40 mins. Ekdum kachra.,2,480,False
+e9f8d7c6-b5a4-4e3d-2c1b-0a9f8e7d6c5b,08/11/2025,Delhi,Zepto,Snacking,Lays,11,House Party Kalesh,Bhai house party saved! Lays reached in 11 mins flat. Systumm set hai ekdum.,5,1200,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,19/02/2025,Bangalore,BigBasket Now,Home Care,Surf Excel,65,Silk Board Jam,Adjust maadi? 65 mins for Surf Excel is too much guru. Surge fee wasting only.,1,450,True
+d7c8b9a0-f1e2-4d3c-4b5a-6f7e8d9c0b1a,28/05/2025,Pune,Snacking,Kurkure,10,FC Road Shopping Break,Naad khula delivery! 10 mins and Kurkure in hand while waiting for bus. Solid work.,5,150,False
+f6e5d4c3-b2a1-4f0e-9d8c-7b6a5e4d3c2b,03/07/2025,Hyderabad,Zepto,Personal Care,Dove,50,IT Raid Scenario,Baigan service. Surge fee taken and 50 mins wait for Dove? Poti panna timing is this.,1,350,True
+b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d,14/03/2025,Bangalore,Blinkit,Ice Cream,Kwality Wall's,13,Pre-Standup Breakfast,Sakkath fast delivery before my 9AM standup. Kwality Wall's reached Indiranagar in 13 mins.,5,550,False
+d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a,10/12/2025,Delhi,Swiggy Instamart,Personal Care,Pepsodent,45,Delhi Smog,Oye kalesh ho gaya delivery me. 45 mins wait after surge fee? Bhai scam hai ye platform.,2,210,True
+c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f,02/06/2025,Mumbai,BigBasket Now,Snacking,Lays,10,Late Night Marine Drive,Fatafat delivery near Marine Drive. Lays was crispy and fresh. Ek number vibe!,5,250,False
+a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d,21/04/2025,Pune,Home Care,Vim,12,Hinjewadi Commute,Vishesh speed in Hinjewadi traffic. Vim reached office PG in 12 mins. Bhaari!,5,180,False
+e2f3a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b,11/07/2025,Mumbai,Zepto,Ice Cream,Magnum,32,Mumbai Monsoon,Magnum is now Magnum milk. 32 mins in Mumbai Monsoon delay. Khali-pili waste.,2,450,False
+b9c0d1e2-f3a4-4b5c-6d7e-8f9a0b1c2d3e,15/09/2025,Hyderabad,Blinkit,Snacking,Maggi,10,Biryani Side-hustle,Kirak fast! Needed Maggi for a quick snack while cooking Biryani. Hau delivery!,5,160,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,05/11/2025,Bangalore,Swiggy Instamart,Home Care,Surf Excel,48,HSR Layout Rush,Macha 48 mins wait and surge fee extra? HSR traffic is bad but platform is worse.,2,600,True
+a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d,29/08/2025,Delhi,Zepto,Personal Care,Dove,11,Gurgaon Office Lunch,Systumm! Dove reached Gurgaon office before my lunch break ended. Gazab delivery.,5,420,False
+c4d5e6f7-a8b9-4c0d-1e2f-3a4b5c6d7e8f,17/01/2025,Pune,Snacking,Kurkure,70,Peth Rush,Solid delay of 70 mins and charged surge also. Kantaala aa gaya Blinkit pe.,1,200,True
+f9e8d7c6-b5a4-4f3e-2d1c-0b9a8f7e6d5c,12/10/2025,Mumbai,Blinkit,Home Care,Vim,14,Ganpati Prep,Vim reached fatafat during Ganpati cleaning. Paisa vasool and ek number timing.,5,300,False
+b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e,08/05/2025,Hyderabad,Swiggy Instamart,Ice Cream,Magnum,12,Summer Heat,Zabardast cooling! Magnum reached perfectly in 12 mins. Hyderabad heat is no match.,5,950,False
+d5e6f7a8-b9c0-4d1e-2f3a-4b5c6d7e8f9a,16/06/2025,Bangalore,Zepto,Snacking,Maggi,10,Indiranagar Party,Maggi reached in 10 mins flat. Sakkath delivery for our Indiranagar house party!,5,220,False
+a8b9c0d1-e2f3-4a4b-5c6d-7e8f9a0b1c2d,24/11/2025,Delhi,BigBasket Now,Home Care,Surf Excel,55,Late Night Kalesh,Bhai 55 mins for Surf Excel with surge? System hang ho gaya platform ka. Bakwas.,1,550,True
+c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f,02/09/2025,Pune,Personal Care,Pepsodent,13,Viman Nagar Student Party,Naad khula speed. Pepsodent reached Viman Nagar PG in 13 mins. Bhaari!,5,160,False
+e4f5a6b7-c8d9-4e0f-1a2b-3c4d5e6f7a8b,19/07/2025,Mumbai,Swiggy Instamart,Ice Cream,Kwality Wall's,38,Mumbai Monsoon,Full melt scene in Mumbai Monsoon. Kwality Wall's is liquid now. Khali-pili waste of 38 mins.,2,350,False
+b7c8d9e0-f1a2-4b3c-4d5e-6f7a8b9c0d1e,10/01/2025,Hyderabad,Zepto,Snacking,Lays,9,Charminar Visit Prep,Hau 9 mins only! Lays reached before we left for Charminar. Kirak service.,5,200,False
+d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a,07/04/2025,Bangalore,Blinkit,Personal Care,Dove,50,Silk Board Jam,Simply waste 50 mins and surge fee? Macha HSR scene is better than this delivery.,1,380,True
+a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d,14/11/2025,Delhi,Swiggy Instamart,Snacking,Maggi,12,IPL at Kotla,Oye hoye swaad! Maggi delivered in 12 mins during the match. Gazab speed bhai.,5,180,False
+c8d9e0f1-a2b3-4c4d-5e6f-7a8b9c0d1e2f,30/03/2025,Pune,Home Care,Surf Excel,14,FC Road Shopping Break,Vishesh timing on FC road. Surf Excel reached in 14 mins. Bhaari delivery!,5,670,False
+e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b,28/07/2025,Mumbai,Zepto,Snacking,Kurkure,45,Mumbai Monsoon,Paid surge fee and 45 mins for Kurkure? Public pagal hai kya platform is slow.,2,190,True
+b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e,13/05/2025,Hyderabad,BigBasket Now,Personal Care,Pepsodent,10,Banjara Hills Guest,Kirak delivery to Banjara Hills. Pepsodent reached in 10 mins. Zabardast speed.,5,150,False
+d9a0b1c2-d3e4-4f5a-6b7c-8d9e0f1a2b3c,05/10/2025,Bangalore,Zepto,Ice Cream,Magnum,15,Indiranagar Party,Macha 15 mins and Magnum was chilled. Sakkath service for Indiranagar folks.,5,450,False
+a2b3c4d5-e6f7-4a8b-9c0d-1e2f3a4b5c6d,19/08/2025,Mumbai,Swiggy Instamart,Snacking,Lays,55,Mumbai Monsoon,55 mins and surge fee for Lays? Mumbai rains are bad but this is kachra service.,1,250,True
+c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f,11/03/2025,Delhi,Blinkit,Snacking,Kurkure,10,House Party Kalesh,Bhai 10 mins flat. Kurkure saved the kalesh scene at home. Systumm set!,5,340,False
+e8f9a0b1-c2d3-4e4f-5a6b-7c8d9e0f1a2b,22/06/2025,Pune,Home Care,Vim,12,Hinjewadi Commute,Naad khula speed in traffic. Vim reached in 12 mins. Solid Pune service.,5,180,False
+b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e,14/07/2025,Mumbai,Zepto,Ice Cream,Kwality Wall's,33,Mumbai Monsoon,Kwality Wall's is now water. 33 mins in Mumbai Monsoon is too late. Khali-pili loss.,2,400,False
+d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a,05/01/2025,Hyderabad,Blinkit,Snacking,Maggi,9,Gachibowli Power Cut,Hau 9 mins delivery during power cut. Maggi was the savior. Kirak timing!,5,120,False
+a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d,12/11/2025,Bangalore,BigBasket Now,Personal Care,Pepsodent,52,Peak HSR Hour,Simply waste 52 mins wait in HSR. Surge fee paid for nothing guru. Adjust maadi?,2,200,True
+c0d1e2f3-a4b5-4c6d-7e8f-8a9b0c1d2e3f,30/09/2025,Delhi,Swiggy Instamart,Ice Cream,Magnum,13,IPL at Kotla,Oye hoye swaad! Magnum reached in 13 mins at Kotla. Systumm delivery.,5,500,False
+e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b,25/05/2025,Pune,Snacking,Lays,11,Viman Nagar Student Party,Bhaari delivery! Lays reached the party in 11 mins. Vishesh service in Pune.,5,250,False
+b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e,15/07/2025,Mumbai,Blinkit,Home Care,Surf Excel,58,Mumbai Monsoon,58 mins and surge fee? Paisa vasool nahi hua platform kachra ho gaya hai.,1,700,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/02/2025,Hyderabad,Zepto,Home Care,Vim,10,Biryani Side-hustle,Kirak speed! Needed Vim urgently for biryani utensils. Hau delivery was fast.,5,180,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,18/04/2025,Bangalore,Swiggy Instamart,Snacking,Kurkure,12,Pre-Standup Breakfast,Macha 12 mins for Kurkure in Indiranagar. Sakkath fast and fresh. Bombat!,5,160,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,12/12/2025,Delhi,Zepto,Personal Care,Dove,46,Delhi Smog,Bhai 46 mins for Dove with surge fee? System hang hai Blinkit ka. Kalesh delivery.,2,380,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,28/03/2025,Pune,Ice Cream,Kwality Wall's,15,FC Road Shopping Break,Naad khula! Kwality Wall's was frozen and reached in 15 mins on FC road. Solid.,5,420,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,BigBasket Now,Ice Cream,Magnum,35,Mumbai Monsoon,Magnum full melt ho gaya in 35 mins rain. Mumbai Monsoon is tough but delay is kachra.,2,550,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/01/2025,Hyderabad,Zepto,Snacking,Lays,10,Charminar Visit Prep,Hau delivery in 10 mins. Lays is fresh. Kirak service for Charminar outing.,5,220,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,14/06/2025,Bangalore,Blinkit,Home Care,Surf Excel,62,Silk Board Jam,Adjust maadi? 62 mins wait and surge fee is simply waste guru. HSR is slow.,1,800,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,05/11/2025,Delhi,Swiggy Instamart,Snacking,Maggi,11,IPL at Kotla,Oye hoye swaad! Maggi reached in 11 mins. Systumm set hai match ke liye.,5,180,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,08/09/2025,Pune,Personal Care,Pepsodent,13,Peth Rush,Vishesh delivery in Peth traffic. Pepsodent reached in 13 mins. Bhaari speed!,5,140,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,16/07/2025,Mumbai,Zepto,Snacking,Kurkure,48,Mumbai Monsoon,48 mins wait + surge fee? Khali-pili waste of money. Mumbai rains sucks.,2,190,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,12/03/2025,Hyderabad,Blinkit,Home Care,Vim,9,Gachibowli Power Cut,Kirak speed during Gachibowli power cut. Vim reached in 9 mins. Zabardast!,5,200,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/04/2025,Bangalore,Zepto,Snacking,Lays,10,Indiranagar Party,Macha 10 mins delivery in Indiranagar. Lays reached before guests. Sakkath speed!,5,450,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/10/2025,Delhi,BigBasket Now,Personal Care,Pepsodent,55,Delhi Smog,Bhai 55 mins and surge fee for Pepsodent? System hang ho gaya ekdum. Scam.,1,180,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,28/08/2025,Pune,Ice Cream,Magnum,14,Viman Nagar Student Party,Naad khula! Magnum was chilled and reached in 14 mins. Viman Nagar crowd vibe!,5,850,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Zepto,Ice Cream,Kwality Wall's,32,Mumbai Monsoon,Kwality Wall's full melt in Mumbai rains. 32 mins is too much. Kachra experience.,2,300,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,15/02/2025,Hyderabad,Swiggy Instamart,Snacking,Maggi,11,Banjara Hills Guest,Hau 11 mins flat to Banjara Hills. Maggi saved the breakfast. Kirak service!,5,240,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/06/2025,Bangalore,Blinkit,Home Care,Vim,49,HSR Layout Rush,Simply waste guru. 49 mins and surge fee? HSR traffic is no excuse. Adjust maadi.,2,220,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,14/11/2025,Delhi,Zepto,Snacking,Kurkure,12,IPL at Kotla,Oye hoye swaad! Kurkure reached in 12 mins. Systumm set hai for final.,5,300,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,02/12/2025,Pune,Home Care,Surf Excel,14,Hinjewadi Commute,Vishesh timing in Hinjewadi. Surf Excel reached in 14 mins. Bhaari performance!,5,580,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,21/07/2025,Mumbai,Blinkit,Snacking,Maggi,52,Mumbai Monsoon,52 mins for Maggi and surge fee? Mumbai rains bad but delivery kachra hai.,1,210,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/01/2025,Hyderabad,Zepto,Personal Care,Dove,9,Charminar Visit Prep,Hau 9 mins Kirak! Dove reached before we started for Charminar. Zabardast!,5,380,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,14/03/2025,Bangalore,Swiggy Instamart,Ice Cream,Magnum,13,Pre-Standup Breakfast,Macha 13 mins and Magnum was frozen. Indiranagar service is sakkath. Bombat!,5,450,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,30/09/2025,Delhi,Blinkit,Home Care,Surf Excel,47,Late Night Kalesh,Bhai 47 mins wait with surge fee? System hang ho gaya platform ka. Bakwas.,2,600,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,15/05/2025,Pune,Personal Care,Pepsodent,12,FC Road Shopping Break,Naad khula speed. Pepsodent reached in 12 mins on FC road. Bhaari service!,5,190,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Zepto,Ice Cream,Magnum,36,Mumbai Monsoon,Magnum melt in Mumbai rains. 36 mins is too slow. Paisa vasool nahi hua.,2,480,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,12/04/2025,Hyderabad,BigBasket Now,Snacking,Lays,10,IT Raid Scenario,Hau 10 mins only! Lays reached fast while we were tense. Kirak timing.,5,250,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/10/2025,Bangalore,Swiggy Instamart,Home Care,Vim,58,Silk Board Jam,Simply waste guru. 58 mins wait and surge fee? Adjust maadi is not working.,1,180,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,28/08/2025,Delhi,Blinkit,Snacking,Maggi,11,House Party Kalesh,Bhai 11 mins flat. Maggi saved the kalesh scene at home. Systumm set!,5,200,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,05/01/2025,Pune,Snacking,Kurkure,13,Viman Nagar Student Party,Vishesh speed for Kurkure. Reached party in 13 mins. Solid Pune vibe!,5,160,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,22/07/2025,Mumbai,Swiggy Instamart,Home Care,Vim,42,Mumbai Monsoon,42 mins wait and surge fee for Vim? Platform is ekdum kachra in rains.,2,280,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,14/09/2025,Hyderabad,Zepto,Personal Care,Pepsodent,10,Banjara Hills Guest,Kirak speed! Pepsodent reached Banjara Hills in 10 mins. Zabardast delivery.,5,150,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,18/02/2025,Bangalore,BigBasket Now,Snacking,Maggi,15,Indiranagar Party,Macha 15 mins for Maggi in Indiranagar. Sakkath fast and ek number service.,5,180,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,12/11/2025,Delhi,Zepto,Home Care,Surf Excel,51,Delhi Smog,Bhai 51 mins wait with surge fee? System hang hai Blinkit ka. Scam delivery.,1,650,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,30/03/2025,Pune,Snacking,Lays,14,Ganpati Visarjan,Naad khula speed during visarjan. Lays reached in 14 mins. Bhaari effort!,5,200,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Blinkit,Ice Cream,Kwality Wall's,38,Mumbai Monsoon,Kwality Wall's full melt. 38 mins in Mumbai Monsoon is kachra service. Waste.,2,420,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/05/2025,Hyderabad,Swiggy Instamart,Snacking,Kurkure,12,Late Night Biryani Supplement,Hau 12 mins flat! Kurkure for the midnight munchies. Kirak zabardast speed.,5,150,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/01/2025,Bangalore,Zepto,Personal Care,Dove,55,Peak HSR Hour,Simply waste 55 mins and surge fee? HSR traffic guru but platform is slow.,1,420,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,14/03/2025,Delhi,BigBasket Now,Snacking,Lays,11,IPL at Kotla,Oye hoye swaad! Lays reached in 11 mins. Systumm set hai match ke liye.,5,220,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,12/12/2025,Pune,Home Care,Vim,14,FC Road Shopping Break,Vishesh speed on FC road. Vim reached in 14 mins. Bhaari Pune service!,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,21/08/2025,Mumbai,Zepto,Snacking,Lays,45,Mumbai Monsoon,45 mins wait + surge fee? Khali-pili kachra experience. Public pagal hai.,2,160,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/04/2025,Hyderabad,Blinkit,Home Care,Surf Excel,9,Gachibowli Power Cut,Kirak speed! Surf Excel reached in 9 mins during power cut. Zabardast!,5,580,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/11/2025,Bangalore,Swiggy Instamart,Personal Care,Pepsodent,10,Pre-Standup Breakfast,Macha 10 mins and Pepsodent was here. Sakkath fast Indiranagar delivery. Bombat!,5,160,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/09/2025,Delhi,Zepto,Ice Cream,Magnum,12,Gurgaon Office Lunch,Oye hoye Magnum reached in 12 mins. Systumm hang ho gaya speed dekh ke.,5,500,False
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,02/06/2025,Pune,Snacking,Maggi,13,Viman Nagar Student Party,Naad khula! Maggi reached Viman Nagar in 13 mins. Bhaari and vishesh timing.,5,210,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Swiggy Instamart,Ice Cream,Magnum,34,Mumbai Monsoon,Magnum is a shake now. 34 mins in Mumbai Monsoon is fail. Kachra service.,2,500,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,16/07/2025,Hyderabad,Zepto,Snacking,Lays,41,Summer Heat,Baigan timing! 41 mins wait and surge fee? Poti panna delivery for Lays.,1,220,True
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/11/2025,Bangalore,Blinkit,Home Care,Surf Excel,65,Silk Board Jam,Adjust maadi? 65 mins and surge fee is simply waste guru. HSR is slow.,1,700,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,12/04/2025,Delhi,Zepto,Snacking,Kurkure,10,Late Night Kalesh,Bhai 10 mins flat. Kurkure saved the kalesh scene at home. Systumm set!,5,340,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,08/02/2025,Pune,Home Care,Vim,12,Hinjewadi Commute,Vishesh speed in traffic. Vim reached in 12 mins. Solid Pune service.,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,15/07/2025,Mumbai,Zepto,Snacking,Maggi,44,Mumbai Monsoon,44 mins wait + surge fee? Khali-pili waste of money. Mumbai rains sucks.,2,200,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,12/03/2025,Hyderabad,Blinkit,Personal Care,Dove,9,Biryani Side-hustle,Kirak speed! Dove reached in 9 mins while cooking biryani. Zabardast!,5,450,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/04/2025,Bangalore,Zepto,Ice Cream,Kwality Wall's,15,Indiranagar Party,Macha 15 mins and ice cream was cold. Indiranagar service is sakkath. Bombat!,5,600,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/10/2025,Delhi,Swiggy Instamart,Personal Care,Pepsodent,48,Delhi Smog,Bhai 48 mins and surge fee? System hang ho gaya platform ka. Scam delivery.,2,150,True
+b9d1e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f,14/08/2025,Mumbai,Blinkit,Ice Cream,Magnum,38,Mumbai Monsoon,Bhai Magnum pura milkshake ban gaya. 38 mins in this rain is too much. Khali-pili delay.,2,450,False
+a1c2e3b4-d5f6-4a7b-8c9d-0e1f2a3b4c5d,22/03/2025,Bangalore,Zepto,Snacking,Maggi,12,Silk Board Jam,Macha the delivery guy skipped Silk Board traffic or what? 12 mins for Maggi is sakkath fast!,5,180,False
+f5e4d3c2-b1a0-4f9e-8d7c-6b5a4e3d2c1b,11/11/2025,Delhi,Swiggy Instamart,Home Care,Surf Excel,55,Delhi Smog,Oye kalesh ho gaya. 55 mins wait and surge fee paid? Platform is total scam. Bhai dimag kharab.,1,850,True
+d8c7b6a5-e4f3-4d2c-1b0a-9f8e7d6c5b4a,05/06/2025,Pune,BigBasket Now,Personal Care,Dove,14,Hinjewadi Commute,Vishesh speed in Hinjewadi traffic! Dove reached the PG in 14 mins. Naad khula delivery.,5,380,False
+b2d3f4e5-a6c7-4b8d-9e0f-1a2b3c4d5e6f,20/01/2025,Hyderabad,Blinkit,Snacking,Lays,9,Gachibowli Power Cut,Hau 9 mins delivery! Needed Lays urgently for the kids during power cut. Kirak service.,5,220,False
+e9f8d7c6-b5a4-4e3d-2c1b-0a9f8e7d6c5b,12/07/2025,Mumbai,Swiggy Instamart,Ice Cream,Kwality Wall's,42,Mumbai Monsoon,Ice cream is liquid. 42 mins in Mumbai Monsoon is kachra service. Full melt scene.,2,650,True
+c4d5e6f7-a8b9-4c0d-1e2f-3a4b5c6d7e8f,18/05/2025,Bangalore,Zepto,Personal Care,Pepsodent,50,Peak HSR Hour,Simply waste guru. 50 mins wait and surge charge also? Indiranagar traffic is better than this.,2,160,True
+a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d,14/03/2025,Delhi,Blinkit,Snacking,Kurkure,11,IPL Finals,Systumm set hai! Kurkure reached in 11 mins before the first ball. Oye hoye swaad aa gaya.,5,280,False
+f1e2d3c4-b5a6-4f7e-8d9c-0b1a2c3d4e5f,25/09/2025,Pune,Zepto,Home Care,Vim,15,FC Road Shopping Break,Bhaari delivery! Vim reached my hostel in 15 mins while I was at FC road. Solid speed.,5,190,False
+d9a0b1c2-d3e4-4f5a-6b7c-8d9e0f1a2b3c,08/04/2025,Hyderabad,Swiggy Instamart,Personal Care,Dove,10,IT Raid Scenario,Kirak timing! Dove reached in 10 mins flat. Zabardast speed for a quick order.,5,420,False
+b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e,19/08/2025,Mumbai,Zepto,Snacking,Maggi,52,Mumbai Monsoon,52 mins for Maggi and surge fee extra? Public pagal hai kya. Platform is ekdum slow.,1,210,True
+a2b3c4d5-e6f7-4a8b-9c0d-1e2f3a4b5c6d,05/01/2025,Bangalore,BigBasket Now,Snacking,Lays,12,Pre-Standup Breakfast,Macha 12 mins only. Lays reached Indiranagar before my standup started. Sakkath timing!,5,150,False
+c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f,12/11/2025,Delhi,Swiggy Instamart,Home Care,Surf Excel,10,House Party Kalesh,Bhai 10 mins and Surf Excel is here. Saved the carpet kalesh! Systumm ek number.,5,750,False
+e8f9a0b1-c2d3-4e4f-5a6b-7c8d9e0f1a2b,28/07/2025,Mumbai,Blinkit,Ice Cream,Magnum,35,Mumbai Monsoon,Full melt ho gaya in 35 mins rain. Magnum is drinkable now. Khali-pili waste of money.,2,550,False
+b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e,02/06/2025,Pune,Snacking,Kurkure,13,Viman Nagar Student Party,Naad khula speed for our party munchies. Kurkure reached in 13 mins. Bhaari service.,5,350,False
+d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a,14/09/2025,Hyderabad,Zepto,Home Care,Vim,9,Biryani Side-hustle,Hau 9 mins delivery. Needed Vim to clean the biryani handi. Kirak speed zabardast!,5,180,False
+a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d,12/03/2025,Bangalore,Swiggy Instamart,Ice Cream,Kwality Wall's,14,Indiranagar Party,Macha 14 mins and ice cream was perfectly frozen. Bombat delivery in Indiranagar traffic.,5,800,False
+c0d1e2f3-a4b5-4c6d-7e8f-8a9b0c1d2e3f,30/10/2025,Delhi,BigBasket Now,Personal Care,Pepsodent,48,Delhi Smog,Challan kat gaya delivery ka. 48 mins wait for Pepsodent and surge fee? Bhai scam hai.,1,190,True
+e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b,25/05/2025,Pune,Home Care,Surf Excel,14,Hinjewadi Commute,Vishesh speed on FC road. Surf Excel reached in 14 mins. Bhaari Pune service!,5,580,False
+b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e,15/07/2025,Mumbai,Blinkit,Snacking,Lays,55,Mumbai Monsoon,55 mins and surge fee for Lays? Mumbai rains are bad but this platform is kachra.,1,250,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/02/2025,Hyderabad,Zepto,Personal Care,Pepsodent,10,Banjara Hills Guest,Kirak delivery to Banjara Hills. Pepsodent reached in 10 mins. Zabardast speed.,5,150,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,18/04/2025,Bangalore,Swiggy Instamart,Snacking,Kurkure,12,Pre-Standup Breakfast,Macha 12 mins for Kurkure in Indiranagar. Sakkath fast and fresh. Bombat!,5,160,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,12/12/2025,Delhi,Zepto,Personal Care,Dove,46,Delhi Smog,Bhai 46 mins for Dove with surge fee? System hang hai Blinkit ka. Kalesh delivery.,2,380,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,28/03/2025,Pune,Ice Cream,Kwality Wall's,15,FC Road Shopping Break,Naad khula! Kwality Wall's was frozen and reached in 15 mins. Solid.,5,420,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,BigBasket Now,Ice Cream,Magnum,35,Mumbai Monsoon,Magnum full melt ho gaya in 35 mins rain. Mumbai Monsoon is tough but delay is kachra.,2,550,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/01/2025,Hyderabad,Zepto,Snacking,Lays,10,Charminar Visit Prep,Hau delivery in 10 mins. Lays is fresh. Kirak service for Charminar outing.,5,220,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/06/2025,Bangalore,Blinkit,Home Care,Vim,49,HSR Layout Rush,Simply waste guru. 49 mins and surge fee? HSR traffic is no excuse. Adjust maadi.,2,220,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,14/11/2025,Delhi,Zepto,Snacking,Kurkure,12,IPL at Kotla,Oye hoye swaad! Kurkure reached in 12 mins. Systumm set hai for final.,5,300,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,02/12/2025,Pune,Home Care,Surf Excel,14,Hinjewadi Commute,Vishesh timing in Hinjewadi. Surf Excel reached in 14 mins. Bhaari performance!,5,580,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,21/07/2025,Mumbai,Blinkit,Snacking,Maggi,52,Mumbai Monsoon,52 mins for Maggi and surge fee? Mumbai rains bad but delivery kachra hai.,1,210,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/01/2025,Hyderabad,Zepto,Personal Care,Dove,9,Charminar Visit Prep,Hau 9 mins Kirak! Dove reached before we started for Charminar. Zabardast!,5,380,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,14/03/2025,Bangalore,Swiggy Instamart,Ice Cream,Magnum,13,Pre-Standup Breakfast,Macha 13 mins and Magnum was frozen. Indiranagar service is sakkath. Bombat!,5,450,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,30/09/2025,Delhi,Blinkit,Home Care,Surf Excel,47,Late Night Kalesh,Bhai 47 mins wait with surge fee? System hang ho gaya platform ka. Bakwas.,2,600,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,15/05/2025,Pune,Personal Care,Pepsodent,12,FC Road Shopping Break,Naad khula speed. Pepsodent reached in 12 mins on FC road. Bhaari service!,5,190,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Zepto,Ice Cream,Magnum,36,Mumbai Monsoon,Magnum melt in Mumbai rains. 36 mins is too slow. Paisa vasool nahi hua.,2,480,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,12/04/2025,Hyderabad,BigBasket Now,Snacking,Lays,10,IT Raid Scenario,Hau 10 mins only! Lays reached fast while we were tense. Kirak timing.,5,250,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/10/2025,Bangalore,Swiggy Instamart,Home Care,Vim,58,Silk Board Jam,Simply waste guru. 58 mins wait and surge fee? Adjust maadi is not working.,1,180,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,28/08/2025,Delhi,Blinkit,Snacking,Maggi,11,House Party Kalesh,Bhai 11 mins flat. Maggi saved the kalesh scene at home. Systumm set!,5,200,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,05/01/2025,Pune,Snacking,Kurkure,13,Viman Nagar Student Party,Vishesh speed for Kurkure. Reached party in 13 mins. Solid Pune vibe!,5,160,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,22/07/2025,Mumbai,Swiggy Instamart,Home Care,Vim,42,Mumbai Monsoon,42 mins wait and surge fee for Vim? Platform is ekdum kachra in rains.,2,280,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,14/09/2025,Hyderabad,Zepto,Personal Care,Pepsodent,10,Banjara Hills Guest,Kirak speed! Pepsodent reached Banjara Hills in 10 mins. Zabardast delivery.,5,150,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,18/02/2025,Bangalore,BigBasket Now,Snacking,Maggi,15,Indiranagar Party,Macha 15 mins for Maggi in Indiranagar. Sakkath fast and ek number service.,5,180,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,12/11/2025,Delhi,Zepto,Home Care,Surf Excel,51,Delhi Smog,Bhai 51 mins wait with surge fee? System hang hai Blinkit ka. Scam delivery.,1,650,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,30/03/2025,Pune,Snacking,Lays,14,Ganpati Visarjan,Naad khula speed during visarjan. Lays reached in 14 mins. Bhaari effort!,5,200,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Blinkit,Ice Cream,Kwality Wall's,38,Mumbai Monsoon,Kwality Wall's full melt. 38 mins in Mumbai Monsoon is kachra service. Waste.,2,420,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/05/2025,Hyderabad,Swiggy Instamart,Snacking,Kurkure,12,Late Night Biryani Supplement,Hau 12 mins flat! Kurkure for the midnight munchies. Kirak zabardast speed.,5,150,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/01/2025,Bangalore,Zepto,Personal Care,Dove,55,Peak HSR Hour,Simply waste 55 mins and surge fee? HSR traffic guru but platform is slow.,1,420,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,14/03/2025,Delhi,BigBasket Now,Snacking,Lays,11,IPL at Kotla,Oye hoye swaad! Lays reached in 11 mins. Systumm set hai match ke liye.,5,220,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,12/12/2025,Pune,Home Care,Vim,14,FC Road Shopping Break,Vishesh speed on FC road. Vim reached in 14 mins. Bhaari Pune service!,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,21/08/2025,Mumbai,Zepto,Snacking,Lays,45,Mumbai Monsoon,45 mins wait + surge fee? Khali-pili kachra experience. Public pagal hai.,2,160,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/04/2025,Hyderabad,Blinkit,Home Care,Surf Excel,9,Gachibowli Power Cut,Kirak speed! Surf Excel reached in 9 mins during power cut. Zabardast!,5,580,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/11/2025,Bangalore,Swiggy Instamart,Personal Care,Pepsodent,10,Pre-Standup Breakfast,Macha 10 mins and Pepsodent was here. Sakkath fast Indiranagar delivery. Bombat!,5,160,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/09/2025,Delhi,Zepto,Ice Cream,Magnum,12,Gurgaon Office Lunch,Oye hoye Magnum reached in 12 mins. Systumm hang ho gaya speed dekh ke.,5,500,False
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,02/06/2025,Pune,Snacking,Maggi,13,Viman Nagar Student Party,Naad khula! Maggi reached Viman Nagar in 13 mins. Bhaari and vishesh timing.,5,210,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Swiggy Instamart,Ice Cream,Magnum,34,Mumbai Monsoon,Magnum is a shake now. 34 mins in Mumbai Monsoon is fail. Kachra service.,2,500,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,16/07/2025,Hyderabad,Zepto,Snacking,Lays,41,Summer Heat,Baigan timing! 41 mins wait and surge fee? Poti panna delivery for Lays.,1,220,True
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/11/2025,Bangalore,Blinkit,Home Care,Surf Excel,65,Silk Board Jam,Adjust maadi? 65 mins and surge fee is simply waste guru. HSR is slow.,1,700,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,12/04/2025,Delhi,Zepto,Snacking,Kurkure,10,Late Night Kalesh,Bhai 10 mins flat. Kurkure saved the kalesh scene at home. Systumm set!,5,340,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,08/02/2025,Pune,Home Care,Vim,12,Hinjewadi Commute,Vishesh speed in traffic. Vim reached in 12 mins. Solid Pune service.,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,15/07/2025,Mumbai,Zepto,Snacking,Maggi,44,Mumbai Monsoon,44 mins wait + surge fee? Khali-pili waste of money. Mumbai rains sucks.,2,200,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,12/03/2025,Hyderabad,Blinkit,Personal Care,Dove,9,Biryani Side-hustle,Kirak speed! Dove reached in 9 mins while cooking biryani. Zabardast!,5,450,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/04/2025,Bangalore,Zepto,Ice Cream,Kwality Wall's,15,Indiranagar Party,Macha 15 mins and ice cream was cold. Indiranagar service is sakkath. Bombat!,5,600,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/10/2025,Delhi,Swiggy Instamart,Personal Care,Pepsodent,48,Delhi Smog,Bhai 48 mins and surge fee? System hang ho gaya platform ka. Scam delivery.,2,150,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,15/05/2025,Pune,Snacking,Lays,12,FC Road Shopping Break,Naad khula speed. Lays reached in 12 mins. Bhaari delivery!,5,150,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Blinkit,Snacking,Kurkure,62,Mumbai Monsoon,62 mins + surge fee? Platform kachra hai. Paisa vasool nahi hua.,1,250,True
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/08/2025,Hyderabad,Swiggy Instamart,Ice Cream,Magnum,10,Late Night Cravings,Hau 10 mins and Magnum was frozen. Kirak speed for midnight cravings.,5,450,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,14/02/2025,Bangalore,Zepto,Home Care,Surf Excel,12,Pre-Standup Breakfast,Macha 12 mins and Surf Excel is here. Sakkath speed in Indiranagar. Bombat!,5,580,False
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,05/11/2025,Delhi,Swiggy Instamart,Personal Care,Dove,55,Delhi Smog,Oye kalesh! 55 mins wait after surge fee? Bhai platform is total scam.,1,380,True
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,02/09/2025,Pune,Snacking,Maggi,11,Viman Nagar Student Party,Vishesh delivery speed! Maggi reached in 11 mins. Naad khula Pune vibes.,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,15/07/2025,Mumbai,Zepto,Home Care,Vim,50,Mumbai Monsoon,50 mins and surge fee? Platform kachra ho gaya hai. Paisa waste.,1,220,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,12/03/2025,Hyderabad,Blinkit,Ice Cream,Kwality Wall's,11,Late Night Biryani Supplement,Hau 11 mins and ice cream reached chilled. Kirak service Hyderabad!,5,550,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/04/2025,Bangalore,Swiggy Instamart,Snacking,Lays,10,Indiranagar Party,Macha 10 mins and Lays reached Indiranagar party. Sakkath service!,5,250,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/10/2025,Delhi,Zepto,Home Care,Vim,45,Delhi Smog,Bhai 45 mins wait after surge? System hang hai inka. Scam platform.,2,190,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,28/08/2025,Pune,Personal Care,Pepsodent,13,FC Road Shopping Break,Naad khula! Pepsodent reached in 13 mins. Solid Pune speed.,5,140,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Blinkit,Ice Cream,Magnum,39,Mumbai Monsoon,Magnum pura melt ho gaya in rains. 39 mins is kachra service. Khali-pili waste.,2,480,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,12/04/2025,Hyderabad,Zepto,Snacking,Maggi,10,IT Raid Scenario,Hau 10 mins only! Maggi reached fast during crisis. Kirak timing.,5,180,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/10/2025,Bangalore,Swiggy Instamart,Snacking,Kurkure,60,Silk Board Jam,Simply waste guru. 60 mins wait + surge fee? HSR traffic is better.,1,150,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,28/08/2025,Delhi,Blinkit,Personal Care,Dove,11,House Party Kalesh,Bhai 11 mins flat. Dove reached before guests arrived. Systumm set!,5,420,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,05/01/2025,Pune,Ice Cream,Kwality Wall's,13,Viman Nagar Student Party,Vishesh speed for ice cream! Perfectly frozen in 13 mins. Bhaari Pune!,5,850,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,22/07/2025,Mumbai,Swiggy Instamart,Home Care,Surf Excel,42,Mumbai Monsoon,42 mins wait and surge fee for Surf Excel? Platform is kachra.,2,700,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,14/09/2025,Hyderabad,Zepto,Personal Care,Pepsodent,10,Banjara Hills Guest,Kirak speed! Pepsodent reached Banjara Hills in 10 mins. Zabardast.,5,150,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,18/02/2025,Bangalore,BigBasket Now,Snacking,Maggi,15,Indiranagar Party,Macha 15 mins for Maggi in Indiranagar. Sakkath fast delivery. Bombat!,5,180,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,12/11/2025,Delhi,Zepto,Home Care,Surf Excel,51,Delhi Smog,Bhai 51 mins wait with surge fee? System hang hai platform ka. Scam.,1,650,True
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,30/03/2025,Pune,Snacking,Lays,14,Ganpati Visarjan,Naad khula speed during visarjan. Lays reached in 14 mins. Bhaari!,5,200,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Blinkit,Ice Cream,Kwality Wall's,38,Mumbai Monsoon,Kwality Wall's full melt. 38 mins in Mumbai Monsoon is kachra.,2,420,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,25/05/2025,Hyderabad,Swiggy Instamart,Snacking,Kurkure,12,Late Night Biryani Supplement,Hau 12 mins flat! Kirak zabardast speed for midnight munchies.,5,150,False
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/01/2025,Bangalore,Zepto,Personal Care,Dove,55,Peak HSR Hour,Simply waste 55 mins and surge fee? HSR traffic guru but platform is slow.,1,420,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,14/03/2025,Delhi,BigBasket Now,Snacking,Lays,11,IPL at Kotla,Oye hoye swaad! Lays reached in 11 mins. Systumm set hai!,5,220,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,12/12/2025,Pune,Home Care,Vim,14,FC Road Shopping Break,Vishesh speed on FC road. Vim reached in 14 mins. Bhaari!,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,21/08/2025,Mumbai,Zepto,Snacking,Lays,45,Mumbai Monsoon,45 mins wait + surge fee? Khali-pili kachra experience. Public pagal hai.,2,160,True
+d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a,08/04/2025,Hyderabad,Blinkit,Home Care,Surf Excel,9,Gachibowli Power Cut,Kirak speed! Surf Excel reached in 9 mins. Zabardast!,5,580,False
+a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d,21/11/2025,Bangalore,Swiggy Instamart,Personal Care,Pepsodent,10,Pre-Standup Breakfast,Macha 10 mins and Pepsodent was here. Sakkath fast. Bombat!,5,160,False
+c7d8e9f0-a1b2-4c3d-8e5f-6a7b8c9d0e1f,10/09/2025,Delhi,Zepto,Ice Cream,Magnum,12,Gurgaon Office Lunch,Oye hoye Magnum reached in 12 mins. Systumm hang speed dekh ke.,5,500,False
+f0e9d8c7-b6a5-4f4e-3d2c-1b0a9f8e7d6c,02/06/2025,Pune,Snacking,Maggi,13,Viman Nagar Student Party,Naad khula! Maggi reached in 13 mins. Bhaari and vishesh timing.,5,210,False
+b3c4d5e6-f7a8-4b9c-0d1e-2f3a4b5c6d7e,19/07/2025,Mumbai,Swiggy Instamart,Ice Cream,Magnum,34,Mumbai Monsoon,Magnum is a shake now. 34 mins in rains is kachra service.,2,500,False
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,16/07/2025,Hyderabad,Zepto,Snacking,Lays,41,Summer Heat,Baigan timing! 41 mins wait and surge fee? Poti panna delivery.,1,220,True
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,05/11/2025,Bangalore,Blinkit,Home Care,Surf Excel,65,Silk Board Jam,Adjust maadi? 65 mins and surge fee is simply waste guru.,1,700,True
+c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f,12/04/2025,Delhi,Zepto,Snacking,Kurkure,10,Late Night Kalesh,Bhai 10 mins flat. Kurkure saved the kalesh. Systumm set!,5,340,False
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,08/02/2025,Pune,Home Care,Vim,12,Hinjewadi Commute,Vishesh speed in traffic. Vim reached in 12 mins. Solid.,5,180,False
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,15/07/2025,Mumbai,Zepto,Snacking,Maggi,44,Mumbai Monsoon,44 mins wait + surge fee? Khali-pili waste of money. Kachra.,2,200,True
+c1a2b3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d,14/01/2025,Bangalore,Zepto,Snacking,Maggi,12,Silk Board Jam,Macha how did he cross Silk Board in 12 mins? Sakkath fast delivery guru. Maggi saved my life.,5,240,False

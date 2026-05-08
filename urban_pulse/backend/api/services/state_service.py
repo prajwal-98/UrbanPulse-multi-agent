@@ -7,6 +7,9 @@ from .file_service import get_session
 
 def _serialize_value(v):
     """Convert non-JSON-serializable objects to JSON-safe types."""
+    import math
+    if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+        return None
     if isinstance(v, pd.DataFrame):
         return f"<DataFrame rows={len(v)}>"
     elif isinstance(v, pd.Timestamp):
@@ -80,17 +83,31 @@ def get_dashboard_data(session_id: str) -> Optional[dict]:
 def save_snapshot(state: dict) -> None:
     from pathlib import Path
     import json
+    import math
 
-    class TimestampEncoder(json.JSONEncoder):
+    class SafeEncoder(json.JSONEncoder):
         def default(self, obj):
             if isinstance(obj, pd.Timestamp):
                 return obj.isoformat()
             return super().default(obj)
 
+        def encode(self, obj):
+            obj = self._clean(obj)
+            return super().encode(obj)
+
+        def _clean(self, obj):
+            if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+                return None
+            if isinstance(obj, dict):
+                return {k: self._clean(v) for k, v in obj.items()}
+            if isinstance(obj, list):
+                return [self._clean(i) for i in obj]
+            return obj
+
     snapshot_path = Path(__file__).resolve().parent.parent.parent.parent / "data" / "state_snapshot.json"
     snapshot_path.parent.mkdir(exist_ok=True)
     with open(snapshot_path, "w") as f:
-        json.dump(state, f, cls=TimestampEncoder)
+        json.dump(state, f, cls=SafeEncoder)
 
 
 def load_snapshot() -> dict | None:
