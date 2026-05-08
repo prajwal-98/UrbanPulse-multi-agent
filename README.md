@@ -173,6 +173,13 @@ Navigate to `http://localhost:3000` and choose a mode from the landing page:
 
 After starting a run, each step page (`/step-1` through `/step-7`) shows the live output of its agent. Step 7 links to `/dashboard` for the A8 final intelligence report.
 
+> 🔒 **Your API Key is Safe**
+> - Your Gemini API key is entered directly in the browser UI and is **never stored on our servers**
+> - It is held only in React component state (in-memory) for the duration of your session
+> - It is sent only to our backend to make LLM calls, and is never logged, saved to disk, or included in any snapshot files
+> - When you close or refresh the browser, the key is gone
+> - The backend explicitly strips `api_key` from all saved state before writing to disk
+
 ---
 
 ## Data Files
