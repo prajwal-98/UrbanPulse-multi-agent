@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { ChevronDown, Check } from "lucide-react";
 import { Sparkline } from "./brief-charts";
 import type { DashboardData } from "@/lib/mock-data";
@@ -62,29 +63,30 @@ export function SignalDrivers({ drivers }: { drivers: string[] }) {
   );
 }
 
-// ── Customer Reviews ──────────────────────────────────────────────────────────
-const REVIEW_TAGS: Record<string, string> = {
-  "CHURN RISK": "bg-red-500/20 text-red-400 border-red-500/30",
-  "TRUST": "bg-amber-500/20 text-amber-400 border-amber-500/30",
-  "LOGISTICS": "bg-purple-500/20 text-purple-400 border-purple-500/30",
-};
+// ── Slang highlighting ────────────────────────────────────────────────────────
+function highlightSlangs(text: string, slangs: string[]): ReactNode {
+  if (!slangs.length) return text;
+  const escaped = slangs.map(s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`(${escaped.join("|")})`, "gi");
+  const parts = text.split(pattern);
+  return parts.map((part, i) =>
+    slangs.some(s => s.toLowerCase() === part.toLowerCase())
+      ? <mark key={i} style={{ background: "rgba(99,102,241,0.25)", color: "#a5b4fc", borderRadius: "3px", padding: "0 3px", fontWeight: 700 }}>{part}</mark>
+      : <span key={i}>{part}</span>
+  );
+}
 
-export function ReviewCards({ evidence }: { evidence: string[] }) {
-  if (!evidence?.length) return <p className="text-sm text-slate-400">No customer reviews available.</p>;
-  const tags = ["CHURN RISK", "TRUST", "LOGISTICS"];
-  const stars = [1, 2, 1];
+// ── Customer Reviews ──────────────────────────────────────────────────────────
+export function ReviewCards({ evidence, slangs = [] }: { evidence: string[]; slangs?: string[] }) {
+  if (!evidence?.length) return <p className="text-sm text-slate-500">No customer reviews available.</p>;
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {evidence.slice(0, 3).map((quote, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col gap-3 min-h-[160px]"
-          style={{ background: "linear-gradient(145deg, #1e293b, #0f172a)", border: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, j) => (
-              <span key={j} className={j < stars[i] ? "text-amber-400" : "text-white/15"} style={{ fontSize: 13 }}>★</span>
-            ))}
-          </div>
-          <p className="text-sm text-white/80 leading-relaxed flex-1">{quote}</p>
-          <span className={`text-[10px] font-bold tracking-widest px-2 py-1 rounded border self-start ${REVIEW_TAGS[tags[i]]}`}>{tags[i]}</span>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {evidence.slice(0, 6).map((quote, i) => (
+        <div key={i} className="rounded-2xl p-5 flex flex-col gap-4 min-h-[160px]"
+          style={{ background: "#0F1929", boxShadow: "inset 3px 0 0 rgba(99,102,241,0.4), 0 0 0 1px rgba(255,255,255,0.06)" }}>
+          <span className="text-3xl font-black text-indigo-500/30 leading-none select-none">"</span>
+          <p className="text-sm text-slate-300 leading-relaxed flex-1 -mt-3">{highlightSlangs(quote, slangs)}</p>
+          <span className="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">Customer Voice</span>
         </div>
       ))}
     </div>
@@ -95,26 +97,37 @@ export function ReviewCards({ evidence }: { evidence: string[] }) {
 interface ActionCardProps {
   num: string; title: string; priority: string; timing: string; dept: string;
   description: string; detail: string; id: number;
-  approved: boolean; onApprove: () => void;
+  approved: boolean; deferred: boolean; onApprove: () => void; onDefer: () => void;
 }
 
-function ActionCard({ num, title, priority, timing, dept, description, detail, id, approved, onApprove }: ActionCardProps) {
+function ActionCard({ num, title, priority, timing, dept, description, detail, id, approved, deferred, onApprove, onDefer }: ActionCardProps) {
   const [expanded, setExpanded] = useState(false);
   const priorityStyle = priority === "HIGH"
     ? "bg-red-500/20 text-red-400 border border-red-500/30"
     : "bg-amber-500/20 text-amber-400 border border-amber-500/30";
+
+  const bg = approved
+    ? "linear-gradient(145deg,rgba(34,197,94,0.08),rgba(15,23,42,0.9))"
+    : deferred
+    ? "linear-gradient(145deg,rgba(100,116,139,0.06),rgba(15,23,42,0.9))"
+    : "linear-gradient(145deg,#1e293b,#0f172a)";
+  const borderColor = approved ? "rgba(34,197,94,0.3)" : deferred ? "rgba(100,116,139,0.2)" : "rgba(255,255,255,0.07)";
+  const accentColor = approved ? "#22c55e" : deferred ? "#475569" : priority === "HIGH" ? "#ef4444" : "#f59e0b";
+
   return (
     <div className="rounded-2xl overflow-hidden transition-all duration-300"
-      style={{ background: approved ? "linear-gradient(145deg,rgba(34,197,94,0.08),rgba(15,23,42,0.9))" : "linear-gradient(145deg,#1e293b,#0f172a)", border: `1px solid ${approved ? "rgba(34,197,94,0.3)" : "rgba(255,255,255,0.07)"}`, borderLeft: `4px solid ${approved ? "#22c55e" : priority === "HIGH" ? "#ef4444" : "#f59e0b"}` }}>
+      style={{ background: bg, border: `1px solid ${borderColor}`, borderLeft: `4px solid ${accentColor}`, opacity: deferred ? 0.55 : 1 }}>
       <div className="p-5">
         <div className="flex items-start gap-4">
           <span className="text-3xl font-black text-white/20 leading-none mt-0.5">{num}</span>
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-sm font-bold text-white leading-snug">{title}</h3>
-              <button onClick={() => setExpanded(!expanded)} className="text-white/30 hover:text-white/60 transition flex-shrink-0 mt-0.5">
-                <ChevronDown size={18} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
-              </button>
+              {detail && (
+                <button onClick={() => setExpanded(!expanded)} className="text-white/30 hover:text-white/60 transition flex-shrink-0 mt-0.5">
+                  <ChevronDown size={18} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+                </button>
+              )}
             </div>
             <div className="flex items-center gap-2 mt-2 flex-wrap">
               <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${priorityStyle}`}>{priority}</span>
@@ -122,9 +135,10 @@ function ActionCard({ num, title, priority, timing, dept, description, detail, i
               <span className="text-[10px] text-white/20">·</span>
               <span className="text-[10px] font-semibold text-white/30 uppercase">{dept}</span>
               {approved && <span className="text-[10px] font-bold text-emerald-400">· dispatched ✓</span>}
+              {deferred && <span className="text-[10px] font-bold text-slate-500">· deferred</span>}
             </div>
             <p className="text-xs text-white/50 mt-2 leading-relaxed">{description}</p>
-            {expanded && (
+            {detail && expanded && (
               <p className="text-xs text-white/40 mt-3 pt-3 border-t border-white/5 leading-relaxed">{detail}</p>
             )}
           </div>
@@ -134,52 +148,74 @@ function ActionCard({ num, title, priority, timing, dept, description, detail, i
             <button disabled className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">
               <Check size={13} /> Approved
             </button>
+          ) : deferred ? (
+            <button onClick={onApprove} className="px-4 py-1.5 rounded-lg bg-emerald-500/80 text-white text-xs font-bold hover:bg-emerald-600 transition">APPROVE</button>
           ) : (
-            <button onClick={onApprove} className="px-4 py-1.5 rounded-lg bg-emerald-500 text-white text-xs font-bold hover:bg-emerald-600 transition">APPROVE</button>
+            <>
+              <button onClick={onApprove} className="px-4 py-1.5 rounded-lg bg-emerald-500 text-white text-xs font-bold hover:bg-emerald-600 transition">APPROVE</button>
+              <button onClick={onDefer} className="px-4 py-1.5 text-white/40 text-xs font-bold hover:text-white/70 transition">DEFER</button>
+            </>
           )}
-          {!approved && <>
-            <button className="px-4 py-1.5 text-white/40 text-xs font-bold hover:text-white/70 transition">EDIT</button>
-            <button className="px-4 py-1.5 text-white/40 text-xs font-bold hover:text-white/70 transition">DEFER</button>
-          </>}
         </div>
       </div>
     </div>
   );
 }
 
+function resolveTitle(title: string, description: string): string {
+  if (title !== "Service Fix") return title;
+  const m = description.match(/related to (.+?) impacting/i);
+  if (m) return m[1].trim();
+  const words = description.split(" ");
+  return words.slice(0, 5).join(" ") + (words.length > 5 ? "…" : "");
+}
+
+function deriveDept(desc: string): string {
+  const d = desc.toLowerCase();
+  if (d.includes("customer") || d.includes("retention") || d.includes("churn")) return "CS";
+  if (d.includes("tech") || d.includes("app") || d.includes("platform")) return "TECH";
+  return "OPS";
+}
+
 export function ActionQueue({ actions }: { actions: DashboardData["actions"] }) {
   const [approved, setApproved] = useState<Set<number>>(new Set());
+  const [deferred, setDeferred] = useState<Set<number>>(new Set());
   const [allDispatched, setAllDispatched] = useState(false);
 
-  const cards = (actions ?? []).slice(0, 3).map((a, i) => ({
-    num: String(i + 1).padStart(2, "0"),
-    title: a.title ?? "—",
-    priority: a.priority === "High" ? "HIGH" : a.priority === "Low" ? "LOW" : "MED",
-    timing: "TODAY",
-    dept: "OPS",
-    description: a.description ?? "",
-    detail: a.description ?? "",
-  }));
-
-    // TO:
-    const approveCard = (id: number) => setApproved(prev => {
-        const next = Array.from(prev);
-        next.push(id);
-        return new Set(next);
-      });    const approveAll = () => {
-        const allIds = cards.map((_, i) => i);
-        setApproved(new Set(allIds));
-        setAllDispatched(true);
+  const cards = (actions ?? []).slice(0, 3).map((a, i) => {
+    const rawTitle = a.title ?? "—";
+    const desc = a.description ?? "";
+    const priority = a.priority === "High" ? "HIGH" : a.priority === "Low" ? "LOW" : "MED";
+    return {
+      num: String(i + 1).padStart(2, "0"),
+      title: resolveTitle(rawTitle, desc),
+      priority,
+      timing: priority === "HIGH" ? "TODAY" : priority === "MED" ? "THIS WEEK" : "BACKLOG",
+      dept: deriveDept(desc),
+      description: desc,
+      detail: "",
     };
+  });
+
+  const approveCard = (id: number) => {
+    setApproved(prev => new Set([...Array.from(prev), id]));
+    setDeferred(prev => { const next = new Set(prev); next.delete(id); return next; });
+  };
+  const deferCard = (id: number) => setDeferred(prev => new Set([...Array.from(prev), id]));
+  const approveAll = () => {
+    setApproved(new Set(cards.map((_, i) => i)));
+    setDeferred(new Set());
+    setAllDispatched(true);
+  };
 
   return (
     <div className="space-y-3">
       {cards.map((c, i) => (
-        <ActionCard key={i} {...c} id={i} approved={approved.has(i)} onApprove={() => approveCard(i)} />
+        <ActionCard key={i} {...c} id={i} approved={approved.has(i)} deferred={deferred.has(i)} onApprove={() => approveCard(i)} onDefer={() => deferCard(i)} />
       ))}
       <button onClick={approveAll} disabled={allDispatched}
         className={`w-full py-3 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300 ${allDispatched ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-default" : "bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg shadow-emerald-500/20"}`}>
-        {allDispatched ? `✓ All ${cards.length} Dispatched` : `Approve All ${cards.length} — dispatch by 18:00`}
+        {allDispatched ? `✓ All ${cards.length} Dispatched` : `Approve All ${cards.length} - dispatch by 18:00`}
       </button>
     </div>
   );

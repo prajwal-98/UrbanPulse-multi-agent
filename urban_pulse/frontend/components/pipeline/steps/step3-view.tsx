@@ -41,7 +41,7 @@ export default function Step3View({ data }: { data: any }) {
         </div>
         <p className="text-xs text-slate-600 leading-relaxed">
           Semantic Shaper finds the most representative complaint in the dataset,
-          then surfaces similar reviews using TF-IDF and cosine similarity — turning one isolated complaint into a recognisable pattern.
+          then surfaces similar reviews using TF-IDF and cosine similarity - turning one isolated complaint into a recognisable pattern.
         </p>
       </div>
 

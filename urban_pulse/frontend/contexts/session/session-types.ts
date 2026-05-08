@@ -39,6 +39,7 @@ export interface SessionState {
 }
 
 export interface SessionContextValue extends SessionState {
+  hydrated: boolean;
   setMode: (mode: Mode) => void;
   setApiKey: (key: string) => void;
   setModel: (model: string) => void;

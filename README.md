@@ -12,11 +12,11 @@
 
 ## What is UrbanPulse
 
-UrbanPulse is a pipeline-driven intelligence system that turns raw customer review CSVs into structured business intelligence — cluster patterns, escalation actions, platform signals, and a final predictive story — without any manual analysis.
+UrbanPulse is a pipeline-driven intelligence system that turns raw customer review CSVs into structured business intelligence - cluster patterns, escalation actions, platform signals, and a final predictive story - without any manual analysis.
 
 It is built for product, ops, and growth teams at quick-commerce platforms (Zepto, Blinkit, Swiggy Instamart, BigBasket Now) who need to understand city-level sentiment, slang-encoded feedback, and delivery pain points at scale. Each uploaded dataset flows through eight specialised AI agents in sequence, with every intermediate output surfaced step-by-step in the UI.
 
-The platform runs fully locally or deploys to Vercel + Railway with no infrastructure changes. It supports three entry modes — a pre-loaded demo, a cached last-run, or a fresh upload — so teams can explore results without re-running the full pipeline every time.
+The platform runs fully locally or deploys to Vercel + Railway with no infrastructure changes. It supports three entry modes - a pre-loaded demo, a cached last-run, or a fresh upload - so teams can explore results without re-running the full pipeline every time.
 
 ---
 
@@ -32,7 +32,7 @@ The pipeline is a sequential LangGraph graph: A1 → A2 → ... → A8. A1 acts 
 | **A4** | Cluster Agent | K-means clustering on review text. LLM enriches each cluster with a name, description, and trend direction. |
 | **A5** | Category Escalation | Converts clusters into prioritised business actions with impacted cities, platforms, and escalation teams. |
 | **A6** | Platform Signal | Aggregates platform share, top brands, category mentions, city volumes, and peak activity hour. |
-| **A7** | Novelty Score | Scores language novelty. Builds slang intelligence index — known vs emerging terms, city-level usage, dominant sentiment per term. |
+| **A7** | Novelty Score | Scores language novelty. Builds slang intelligence index - known vs emerging terms, city-level usage, dominant sentiment per term. |
 | **A8** | Insight Dashboard | Synthesises all agent outputs into a final story, confidence score, revenue risk estimate, churn probability, and ranked action plan. |
 
 ---
@@ -154,7 +154,7 @@ Create a `.env` file at the repo root (or set these in your deployment dashboard
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key — used by A2, A3, A4, A5, A7, A8 |
+| `GEMINI_API_KEY` | Yes | Google Gemini API key - used by A2, A3, A4, A5, A7, A8 |
 | `NEXT_PUBLIC_API_URL` | Yes | Full URL of the FastAPI backend, e.g. `http://localhost:8000` |
 
 > Never commit `GEMINI_API_KEY` to git. Run `python scripts/clean_snapshots.py` before every push to strip any keys that leaked into snapshot files.
@@ -167,7 +167,7 @@ Navigate to `http://localhost:3000` and choose a mode from the landing page:
 
 | Mode | Description |
 |------|-------------|
-| **Try Demo** | Loads `data/demo/demo_source.csv` — 200 pre-loaded Indian quick-commerce reviews. No upload needed. |
+| **Try Demo** | Loads `data/demo/demo_source.csv` - 200 pre-loaded Indian quick-commerce reviews. No upload needed. |
 | **Last Run** | Restores the most recent completed pipeline run from `data/state_snapshot.json`. Instantly shows all A1–A8 outputs without re-running agents. |
 | **My Data** | Upload your own CSV (max 50 MB). Must contain: `review_id`, `date`, `city`, `platform`, `category`, `brand`, `raw_text`, `star_rating`. Pipeline runs end-to-end. |
 

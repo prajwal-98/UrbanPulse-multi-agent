@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/contexts/session-context";
@@ -11,7 +11,13 @@ export default function Sidebar() {
   const router = useRouter();
   const session = useSession();
 
-  const [collapsed, setCollapsed] = useState(session.pipelineStatus !== "idle");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (session.hydrated) {
+      setCollapsed(session.pipelineStatus !== "idle");
+    }
+  }, [session.hydrated]);
 
   const canRun =
     session.uploadStatus === "ready" &&
@@ -171,7 +177,7 @@ export default function Sidebar() {
             <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${dotColor}`} />
           </span>
           <span className={`text-[10px] font-semibold uppercase tracking-widest ${dotLabelColor}`}>
-            {dotLabel}
+            {session.hydrated ? dotLabel : "Awaiting Input"}
           </span>
         </div>
       </div>

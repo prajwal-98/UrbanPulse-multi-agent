@@ -80,7 +80,7 @@ export default function SidebarUploadPanel({ session }: Props) {
         </div>
         {isSampleDemo ? (
           <p className="text-[10px] text-emerald-600 font-medium mt-1.5 px-1">
-            Sample Demo mode — using bundled dataset
+            Sample Demo mode - using bundled dataset
           </p>
         ) : session.mode === "demo" ? (
           <p className="text-[10px] text-slate-400 mt-1.5 px-1">

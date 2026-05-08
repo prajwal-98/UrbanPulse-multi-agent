@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useRef, ReactNode } from "react";
+import { createContext, useContext, useState, useRef, useEffect, ReactNode } from "react";
 import { type SessionState, type SessionContextValue, defaultState } from "./session/session-types";
 import { createSessionActions } from "./session/session-actions";
 
@@ -13,8 +13,12 @@ export function useSession(): SessionContextValue {
 }
 
 export function SessionProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<SessionState>(() => {
-    if (typeof window === "undefined") return defaultState;
+  const [state, setState] = useState<SessionState>(defaultState);
+  const [hydrated, setHydrated] = useState(false);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+
+  useEffect(() => {
     const mode = localStorage.getItem("session_mode");
     const savedUploadStatus = localStorage.getItem("session_upload_status");
     const savedSessionId = localStorage.getItem("session_id");
@@ -23,7 +27,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const savedDemoFilterOptionsRaw = localStorage.getItem("demo_filter_options");
     const savedDemoFilterOptions = savedDemoFilterOptionsRaw ? JSON.parse(savedDemoFilterOptionsRaw) : null;
     if (mode === "demo" && savedUploadStatus === "ready") {
-      return {
+      setState({
         ...defaultState,
         mode: "demo",
         uploadStatus: "ready",
@@ -39,10 +43,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
             totalRows: savedDemoFilterOptions.total_rows ?? 0,
           },
         }),
-      };
-    }
-    if (mode === "sample_demo" && savedUploadStatus === "ready") {
-      return {
+      });
+    } else if (mode === "sample_demo" && savedUploadStatus === "ready") {
+      setState({
         ...defaultState,
         mode: "sample_demo",
         uploadStatus: "ready",
@@ -58,12 +61,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
             totalRows: savedFilterOptions.total_rows ?? 0,
           },
         }),
-      };
+      });
+    } else if (mode === "sample_demo") {
+      setState({ ...defaultState, mode: "sample_demo", sessionId: savedSessionId });
     }
-    return mode === "sample_demo" ? { ...defaultState, mode: "sample_demo", sessionId: savedSessionId } : defaultState;
-  });
-  const stateRef = useRef(state);
-  stateRef.current = state;
+    setHydrated(true);
+  }, []);
 
   const patch = (partial: Partial<SessionState>) =>
     setState((s) => ({ ...s, ...partial }));
@@ -71,7 +74,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const actions = createSessionActions(setState, patch, stateRef);
 
   return (
-    <SessionContext.Provider value={{ ...state, ...actions }}>
+    <SessionContext.Provider value={{ ...state, hydrated, ...actions }}>
       {children}
     </SessionContext.Provider>
   );
