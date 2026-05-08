@@ -179,35 +179,78 @@ export default function Sidebar() {
       {/* ══ SCROLLABLE CONTROLS ══════════════════ */}
       <div className="flex-1 overflow-y-auto px-4 py-5 space-y-0">
 
-        <SidebarUploadPanel session={session} />
-        <SidebarFilterPanel session={session} />
-
-        <div className="border-t border-slate-100 my-4" />
-
-        {/* ── START ANALYSIS CTA ───────────────── */}
-        {session.uploadStatus === "ready" && (
-          <div className="mb-5">
-            <button
-              type="button"
-              onClick={handleRunAnalysis}
-              disabled={!canRun}
-              className={`w-full py-2.5 text-sm font-semibold rounded-xl transition-all duration-150
-                ${
-                  canRun
-                    ? "bg-slate-900 text-white hover:bg-slate-800 shadow-sm hover:shadow-md"
-                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                }`}
-            >
-              {session.mode === "live" && !session.apiKey
-                ? "Enter API key to run"
-                : "Run Analysis →"}
-            </button>
-            {canRun && (
-              <p className="text-[10px] text-slate-400 text-center mt-1.5">
-                Runs A1 → A8 pipeline
+        {session.mode === "sample_demo" ? (
+          <>
+            {/* ── DEMO INFO CARD ───────────────────── */}
+            <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3.5 mb-4">
+              <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 rounded-full px-2 py-0.5 mb-2">
+                Try Demo
+              </span>
+              <p className="text-sm font-semibold text-slate-800 leading-snug">
+                Pre-loaded demo dataset
               </p>
+              <p className="text-xs text-slate-500 mt-0.5">
+                {session.filterOptions?.totalRows ?? "—"} reviews ready
+              </p>
+            </div>
+
+            <div className="border-t border-slate-100 my-4" />
+
+            {/* ── START ANALYSIS CTA ───────────────── */}
+            <div className="mb-5">
+              <button
+                type="button"
+                onClick={handleRunAnalysis}
+                disabled={!canRun}
+                className={`w-full py-2.5 text-sm font-semibold rounded-xl transition-all duration-150
+                  ${
+                    canRun
+                      ? "bg-slate-900 text-white hover:bg-slate-800 shadow-sm hover:shadow-md"
+                      : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                  }`}
+              >
+                Run Analysis →
+              </button>
+              {canRun && (
+                <p className="text-[10px] text-slate-400 text-center mt-1.5">
+                  Runs A1 → A8 pipeline
+                </p>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <SidebarUploadPanel session={session} />
+            <SidebarFilterPanel session={session} />
+
+            <div className="border-t border-slate-100 my-4" />
+
+            {/* ── START ANALYSIS CTA ───────────────── */}
+            {session.uploadStatus === "ready" && (
+              <div className="mb-5">
+                <button
+                  type="button"
+                  onClick={handleRunAnalysis}
+                  disabled={!canRun}
+                  className={`w-full py-2.5 text-sm font-semibold rounded-xl transition-all duration-150
+                    ${
+                      canRun
+                        ? "bg-slate-900 text-white hover:bg-slate-800 shadow-sm hover:shadow-md"
+                        : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                    }`}
+                >
+                  {session.mode === "live" && !session.apiKey
+                    ? "Enter API key to run"
+                    : "Run Analysis →"}
+                </button>
+                {canRun && (
+                  <p className="text-[10px] text-slate-400 text-center mt-1.5">
+                    Runs A1 → A8 pipeline
+                  </p>
+                )}
+              </div>
             )}
-          </div>
+          </>
         )}
 
       </div>

@@ -49,7 +49,7 @@ async def use_demo_dataset():
     try:
         session_id, _, filter_opts = await load_demo_session()
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Failed to load demo data: {exc}")
+        raise HTTPException(status_code=1500, detail=f"Failed to load demo data: {exc}")
 
     snapshot = load_snapshot()
     if snapshot:
@@ -75,7 +75,7 @@ async def use_sample_demo_dataset():
     try:
         session_id, _, filter_opts = await load_sample_demo_session()
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Failed to load sample demo data: {exc}")
+        raise HTTPException(status_code=1500, detail=f"Failed to load sample demo data: {exc}")
 
     snapshot = load_sample_snapshot()
     if snapshot:

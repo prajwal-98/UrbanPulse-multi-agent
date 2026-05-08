@@ -20,7 +20,7 @@ const STEPS = [
   { num: 8, label: "Intelligence Reporting",activeMsg: "Generating final intelligence…",       doneMsg: "Intelligence ready"      },
 ] as const;
 
-function CompletionModal({ onClose }: { onClose: () => void }) {
+function CompletionModal({ onClose, showSavedBanner }: { onClose: () => void; showSavedBanner: boolean }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
@@ -41,6 +41,17 @@ function CompletionModal({ onClose }: { onClose: () => void }) {
               All 8 agents have finished processing. What would you like to do next?
             </p>
           </div>
+
+          {showSavedBanner && (
+            <div className="flex items-start gap-2.5 bg-emerald-50 border border-emerald-100 rounded-xl px-3.5 py-3 mb-2">
+              <svg className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <p className="text-[11px] text-emerald-700 leading-relaxed">
+                <span className="font-semibold">Run saved automatically.</span> Next time, switch to <span className="font-semibold">Last Run</span> in the sidebar to replay this analysis — no API key needed.
+              </p>
+            </div>
+          )}
 
           <div className="flex flex-col gap-3">
             <Link href="/step-1" onClick={onClose}>
@@ -91,7 +102,7 @@ function CompletionModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function PipelineScreen() {
-  const { sessionId, pipelineStatus } = useSession();
+  const { sessionId, pipelineStatus, mode } = useSession();
   const isIdle = pipelineStatus === "idle";
 
   const { localStatus, localProgress, currentStepNum, localError } = usePipelinePoller(sessionId, pipelineStatus);
@@ -252,7 +263,10 @@ export default function PipelineScreen() {
 
       </div>
       {showCompletionModal && (
-        <CompletionModal onClose={() => setShowCompletionModal(false)} />
+        <CompletionModal
+          onClose={() => setShowCompletionModal(false)}
+          showSavedBanner={mode === "live"}
+        />
       )}
     </div>
   );
