@@ -18,7 +18,8 @@ CORS_ORIGINS = [
 ]
 
 AVAILABLE_MODELS = [
-    "gemini-3.1-flash-lite-preview",
+    "gemini-3.1-flash-lite",
+    "gemini-3.1-flash-lite-preview"
 ]
 
 MAX_FILE_SIZE_MB = 50

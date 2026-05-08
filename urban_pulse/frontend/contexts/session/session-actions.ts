@@ -157,7 +157,7 @@ export function createSessionActions(
             progress: (n - 1) * 12
           });
         });
-        await delay(1500);
+        await delay(200);
         flushSync(() => {
           patch({
             stepStatus: { ...stateRef.current.stepStatus, [`A${n}`]: "done" },
@@ -181,7 +181,7 @@ export function createSessionActions(
             progress: (n - 1) * 12
           });
         });
-        await delay(1500);
+        await delay(200);
         flushSync(() => {
           patch({
             stepStatus: { ...stateRef.current.stepStatus, [`A${n}`]: "done" },

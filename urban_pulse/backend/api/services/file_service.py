@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Optional
 from datetime import datetime
 
-from ..config import UPLOAD_DIR, DEMO_DATA_PATH, SAMPLE_DEMO_DATA_PATH, SAMPLE_DEMO_STATE_PATH
+from ..config import UPLOAD_DIR, DEMO_DATA_PATH, SAMPLE_DEMO_DATA_PATH
 from ..schemas.response_models import FilterOptions
 
 # In-memory session store: session_id -> { df, filename, mode, state, status, progress }
@@ -156,20 +156,24 @@ async def load_sample_demo_session() -> tuple[str, pd.DataFrame, FilterOptions]:
     df = normalize_dataframe(df)
     filter_opts = _extract_filter_options(df)
 
-    state = None
-    if SAMPLE_DEMO_STATE_PATH.exists():
-        raw = json.loads(SAMPLE_DEMO_STATE_PATH.read_text())
-        state = raw if raw else None
-
     set_session(session_id, {
         "df": df,
         "filename": "sample_dataset.csv",
         "mode": "sample_demo",
-        "state": state,
+        "state": None,
         "status": "pending",
         "progress": 0,
         "current_step": None,
         "step_status": {},
         "error": None,
     })
+
+    sample_state_path = Path(__file__).resolve().parent.parent.parent.parent / "data" / "sample_demo" / "sample_state.json"
+    if sample_state_path.exists():
+        with open(sample_state_path, "r") as f:
+            sample_state = json.load(f)
+        if sample_state:
+            current = get_session(session_id)
+            set_session(session_id, {**current, "state": sample_state})
+
     return session_id, df, filter_opts

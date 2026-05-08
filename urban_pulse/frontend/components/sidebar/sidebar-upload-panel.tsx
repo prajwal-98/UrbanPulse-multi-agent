@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import type { Mode, UploadStatus } from "@/contexts/session-context";
 
 const MODELS = [
-  { id: "gemini-3.1-flash-lite-preview", label: "gemini-3.1-flash-lite-preview" },
+  { id: "gemini-3.1-flash-lite", label: "gemini-3.1-flash-lite" },
+  { id: "gemini-3.1-flash-lite-preview", label: "gemini-3.1-flash-lite-preview" }
 ];
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {

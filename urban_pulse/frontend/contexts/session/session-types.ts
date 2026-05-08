@@ -73,7 +73,7 @@ export const defaultFilters: Filters = {
 export const defaultState: SessionState = {
   mode: "live",
   apiKey: "",
-  model: "gemini-3.1-flash-lite-preview",
+  model: "gemini-3.1-flash-lite",
   sessionId: null,
   filename: null,
   uploadStatus: "idle",

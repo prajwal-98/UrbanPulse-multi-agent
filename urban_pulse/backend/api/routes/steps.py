@@ -19,7 +19,8 @@ def get_step(session_id: str, step: int):
     step_status = session.get("step_status") or {}
     step_done = step_status.get(f"A{step}") == "done"
 
-    if session_status not in ("complete", "error") and not step_done:
+    has_snapshot = bool(session.get("state"))
+    if session_status not in ("complete", "error") and not step_done and not has_snapshot:
         raise HTTPException(status_code=409, detail="Step not yet complete.")
     data = get_step_data(session_id, step)
     return StepResponse(

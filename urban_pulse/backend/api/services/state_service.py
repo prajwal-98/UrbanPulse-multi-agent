@@ -63,7 +63,7 @@ def get_dashboard_data(session_id: str) -> Optional[dict]:
     if not a8:
         return None
 
-    print("[A8 OUTPUT]", a8)
+    # print("[A8 OUTPUT]", a8)
     return {
         "story":      a8.get("story"),
         "confidence": a8.get("confidence"),
