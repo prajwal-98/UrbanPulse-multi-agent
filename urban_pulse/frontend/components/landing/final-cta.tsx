@@ -1,6 +1,30 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
 export default function FinalCta() {
+  const router = useRouter();
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
+
+  const handleSampleDemo = async () => {
+    setIsDemoLoading(true);
+    try {
+      const res = await fetch(`${BACKEND}/upload/sample-demo`, { method: "POST" });
+      if (!res.ok) return;
+      const data = await res.json();
+      localStorage.setItem("session_id", data.session_id);
+      localStorage.setItem("session_mode", "sample_demo");
+      localStorage.setItem("session_upload_status", "ready");
+      localStorage.setItem("sample_filter_options", JSON.stringify(data.filter_options));
+      router.push("/landing");
+    } finally {
+      setIsDemoLoading(false);
+    }
+  };
   return (
     <section className="bg-slate-900 py-28 lg:py-36 relative overflow-hidden">
       {/* Subtle dot grid */}
@@ -56,12 +80,21 @@ export default function FinalCta() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors"
+          <button
+            onClick={handleSampleDemo}
+            disabled={isDemoLoading}
+            className="flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            View Example Dashboard
-          </Link>
+            {isDemoLoading ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Waking up server...
+              </span>
+            ) : "Try Demo"}
+          </button>
         </div>
 
         {/* Footer note */}
