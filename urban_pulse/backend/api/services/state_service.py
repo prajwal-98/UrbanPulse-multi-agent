@@ -96,6 +96,12 @@ def save_snapshot(state: dict) -> None:
             return super().encode(obj)
 
         def _clean(self, obj):
+            try:
+                import numpy as np
+                if isinstance(obj, (np.floating, np.integer)):
+                    obj = obj.item()
+            except ImportError:
+                pass
             if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
                 return None
             if isinstance(obj, dict):
@@ -106,10 +112,11 @@ def save_snapshot(state: dict) -> None:
 
     snapshot_path = Path(__file__).resolve().parent.parent.parent.parent / "data" / "state_snapshot.json"
     snapshot_path.parent.mkdir(exist_ok=True)
+    SENSITIVE_KEYS = {"api_key", "model", "raw_df", "filtered_df"}
+    state = {k: v for k, v in state.items() if k not in SENSITIVE_KEYS}
+    cleaned = SafeEncoder()._clean(state)
     with open(snapshot_path, "w") as f:
-        SENSITIVE_KEYS = {"api_key", "model", "raw_df", "filtered_df"}
-        state = {k: v for k, v in state.items() if k not in SENSITIVE_KEYS}
-        json.dump(state, f, cls=SafeEncoder)
+        json.dump(cleaned, f, cls=SafeEncoder)
 
 
 def load_snapshot() -> dict | None:

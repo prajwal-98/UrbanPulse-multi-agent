@@ -88,7 +88,7 @@ export default function Step5View({ data }: { data: any }) {
           </svg>
         </div>
         <p className="text-xs text-slate-600 leading-relaxed">
-          Category & Escalation converts issue clusters into business action plans — assigning priority, responsible teams, and impact scope so the right people act on the right problems immediately.
+          Category & Escalation converts issue clusters into business action plans - assigning priority, responsible teams, and impact scope so the right people act on the right problems immediately.
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default function Step5View({ data }: { data: any }) {
 
       {/* Section label */}
       <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-        Issue briefings — click to expand
+        Issue briefings - click to expand
       </p>
 
       {/* Issue cards */}

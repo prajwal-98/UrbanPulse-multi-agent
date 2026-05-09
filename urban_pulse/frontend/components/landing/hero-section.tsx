@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export default function HeroSection() {
   const router = useRouter();
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
 
   const handleStartAnalysis = () => {
     localStorage.removeItem("session_mode");
@@ -15,14 +17,19 @@ export default function HeroSection() {
   };
 
   const handleSampleDemo = async () => {
-    const res = await fetch(`${BACKEND}/upload/sample-demo`, { method: "POST" });
-    if (!res.ok) return;
-    const data = await res.json();
-    localStorage.setItem("session_id", data.session_id);
-    localStorage.setItem("session_mode", "sample_demo");
-    localStorage.setItem("session_upload_status", "ready");
-    localStorage.setItem("sample_filter_options", JSON.stringify(data.filter_options));
-    router.push("/landing");
+    setIsDemoLoading(true);
+    try {
+      const res = await fetch(`${BACKEND}/upload/sample-demo`, { method: "POST" });
+      if (!res.ok) return;
+      const data = await res.json();
+      localStorage.setItem("session_id", data.session_id);
+      localStorage.setItem("session_mode", "sample_demo");
+      localStorage.setItem("session_upload_status", "ready");
+      localStorage.setItem("sample_filter_options", JSON.stringify(data.filter_options));
+      router.push("/landing");
+    } finally {
+      setIsDemoLoading(false);
+    }
   };
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white">
@@ -96,9 +103,18 @@ export default function HeroSection() {
           </button>
           <button
             onClick={handleSampleDemo}
-            className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors"
+            disabled={isDemoLoading}
+            className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Try Demo
+            {isDemoLoading ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Waking up server...
+              </span>
+            ) : "Try Demo"}
           </button>
         </div>
 

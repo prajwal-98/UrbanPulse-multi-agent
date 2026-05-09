@@ -37,7 +37,11 @@ def main():
 
     for path in SNAPSHOT_FILES:
         stats = {"nan_inf": 0, "sensitive": 0}
-        data = json.loads(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(': NaN', ': null').replace(':NaN', ':null')
+        text = text.replace(': Infinity', ': null').replace(':Infinity', ':null')
+        text = text.replace(': -Infinity', ': null').replace(':-Infinity', ':null')
+        data = json.loads(text)
         cleaned = clean(data, stats)
         path.write_text(json.dumps(cleaned), encoding="utf-8")
         print(

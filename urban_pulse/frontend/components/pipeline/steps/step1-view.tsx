@@ -273,7 +273,7 @@ export default function Step1View({ data, onContinue }: Step1ViewProps) {
         <div className="flex-1 min-w-0">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 mb-1.5">What this agent does</p>
           <p className="text-[13px] text-slate-700 leading-relaxed">
-            Gatekeeper validates schema integrity, checks for missing values, and generates distribution signals. Only clean, structured data proceeds to downstream agents — this is the quality gate.
+            Gatekeeper validates schema integrity, checks for missing values, and generates distribution signals. Only clean, structured data proceeds to downstream agents, this is the quality gate.
           </p>
         </div>
       </div>
@@ -410,7 +410,7 @@ export default function Step1View({ data, onContinue }: Step1ViewProps) {
             </div>
             <div className="bg-gradient-to-br from-white to-slate-50/30 border border-slate-200/80 rounded-2xl p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_12px_rgba(15,23,42,0.06)] transition-shadow">
               <RatingChart data={ratingDist} title="Star Rating Distribution" />
-              <p className="text-[10px] text-slate-400 mt-3 italic leading-relaxed">Sentiment polarity — skew signals priority for downstream agents</p>
+              <p className="text-[10px] text-slate-400 mt-3 italic leading-relaxed">Sentiment polarity - skew signals priority for downstream agents</p>
             </div>
           </div>
 

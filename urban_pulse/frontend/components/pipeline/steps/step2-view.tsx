@@ -79,7 +79,7 @@ export default function Step2View({ data }: { data: any }) {
           </svg>
         </div>
         <p className="text-xs text-slate-600 leading-relaxed">
-          Context Detector reads the filtered dataset and extracts situational intelligence — city dynamics, platform signals, recurring complaint themes, and local slang. It converts raw reviews into a structured understanding of what kind of problem the data describes, before deeper analysis begins in A3.
+          Context Detector reads the filtered dataset and extracts situational intelligence - city dynamics, platform signals, recurring complaint themes, and local slang. It converts raw reviews into a structured understanding of what kind of problem the data describes, before deeper analysis begins in A3.
         </p>
       </div>
 

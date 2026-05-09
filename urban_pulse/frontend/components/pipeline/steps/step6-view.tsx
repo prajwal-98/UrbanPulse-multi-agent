@@ -69,7 +69,7 @@ export default function Step6View({ data }: { data: any }) {
           </svg>
         </div>
         <p className="text-xs text-slate-600 leading-relaxed">
-          Platform Signal Intelligence compares complaint volume across delivery platforms, brands, and categories — identifying which platform dominates negative sentiment, which cities are loudest, and when complaints peak during the day.
+          Platform Signal Intelligence compares complaint volume across delivery platforms, brands, and categories - identifying which platform dominates negative sentiment, which cities are loudest, and when complaints peak during the day.
         </p>
       </div>
       {/* Lede */}
@@ -77,7 +77,7 @@ export default function Step6View({ data }: { data: any }) {
         <p className="text-[11px] font-medium uppercase tracking-widest text-slate-400 mb-1">A6 · Platform signal intelligence</p>
         <p className="text-lg font-medium text-slate-800 leading-snug">
           {p0 ? (
-            <><span className="text-indigo-600">{p0.platform}</span> leads with {p0.share}% of complaint volume — peaking during <span className="text-indigo-600">{time?.label}</span> hours</>
+            <><span className="text-indigo-600">{p0.platform}</span> leads with {p0.share}% of complaint volume - peaking during <span className="text-indigo-600">{time?.label}</span> hours</>
           ) : "No dominant platform detected."}
         </p>
         <p className="text-xs text-slate-400 mt-1">{platforms.length} platforms · {cities.length} cities tracked</p>

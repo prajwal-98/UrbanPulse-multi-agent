@@ -9,7 +9,7 @@ from utils.llm_client import generate_response
 
 def semantic_shaper_node(state: UrbanPulseState) -> UrbanPulseState:
     """
-    Step 3 — Semantic Shaper (A3)
+    Step 3 - Semantic Shaper (A3)
     - Sentiment filter (negative/neutral only)
     - TF-IDF vectorization
     - Smart anchor selection with metadata
